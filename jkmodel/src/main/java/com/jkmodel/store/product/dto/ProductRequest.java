@@ -1,69 +1,25 @@
-package com.jkmodel.store.product.model;
+package com.jkmodel.store.product.dto;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-//@Entity
-//@Table(name = "product")
-public class Product {
+public class ProductRequest {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "productNo")
-    private Integer productNo;
-
-//    @Column(name = "name")
+//    private Integer productNo;
     private String name;
-
-//    @Column(name = "category")
     private String category;
-
-//    @Column(name = "price")
     private Double price;
-
-//    @Column(name = "cost")
     private Double cost;
-
-//    @Column(name = "stock")
     private Integer stock;
-
-//    @Column(name = "sellQuantity")
-    private Integer sellQuantity;
-
-//    @Column(name = "buyCount")
-    private Integer buyCount;
-
-//    @Column(name = "views")
-    private Integer views;
-
-//    @Column(name = "onTime")
+//    private Integer sellQuantity;
+//    private Integer buyCount;
+//    private Integer views;
     private Timestamp onTime;
-
-//    @Column(name = "offTime")
     private Timestamp offTime;
-
-//    @Column(name = "lastModifiedTime")
-    private Timestamp lastModifiedTime;
-
-//    @Column(name = "photoNo")
+//    private Timestamp lastModifiedTime;
     private Integer photoNo;
-
-//    @Column(name = "description")
     private String description;
-
-//    @Column(name = "status")
     private Boolean status;
-
-//    @Column(name = "admId")
     private Integer admId;
-
-    public Integer getProductNo() {
-        return productNo;
-    }
-
-    public void setProductNo(Integer productNo) {
-        this.productNo = productNo;
-    }
 
     public String getName() {
         return name;
@@ -105,30 +61,6 @@ public class Product {
         this.stock = stock;
     }
 
-    public Integer getSellQuantity() {
-        return sellQuantity;
-    }
-
-    public void setSellQuantity(Integer sellQuantity) {
-        this.sellQuantity = sellQuantity;
-    }
-
-    public Integer getBuyCount() {
-        return buyCount;
-    }
-
-    public void setBuyCount(Integer buyCount) {
-        this.buyCount = buyCount;
-    }
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
     public Timestamp getOnTime() {
         return onTime;
     }
@@ -143,14 +75,6 @@ public class Product {
 
     public void setOffTime(Timestamp offTime) {
         this.offTime = offTime;
-    }
-
-    public Timestamp getLastModifiedTime() {
-        return lastModifiedTime;
-    }
-
-    public void setLastModifiedTime(Timestamp lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime;
     }
 
     public Integer getPhotoNo() {
