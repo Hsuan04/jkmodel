@@ -15,5 +15,5 @@ public interface ProductService {
 
     Product update(Integer productNo, Product product);
 
-    Iterable<Product> findAll();
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 }

@@ -2,6 +2,7 @@ package com.jkmodel.store.product.service;
 
 
 import com.jkmodel.store.product.QueryParams.ProductQueryParams;
+import com.jkmodel.store.product.dao.ProductDao;
 import com.jkmodel.store.product.model.Product;
 import com.jkmodel.store.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductDao productDao;
 
     @Override
     public Product save(Product product) {
@@ -48,9 +52,7 @@ public class ProductServiceImpl implements ProductService{
         return product.orElse(null);
     }
 
-    @Override
-    public Iterable<Product> findAll() {
-        Iterable<Product> products = productRepository.findAll();
-        return products;
+    public List<Product> getProducts(ProductQueryParams productQueryParams){
+        return productDao.getProducts(productQueryParams);
     }
 }

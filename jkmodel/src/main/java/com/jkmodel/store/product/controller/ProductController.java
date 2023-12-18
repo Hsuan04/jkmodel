@@ -82,7 +82,7 @@ public class ProductController {
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
 
-        Iterable<Product> products = productService.findAll();
+        Iterable<Product> products = productService.getProducts(productQueryParams);
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
