@@ -20,8 +20,8 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
         //SQL語法
-        String sql = "select productNo, `name`, category, price, cost, stock,sellQuantity, buyCount, views, onTime, offTime, lastModifiedTime, photoNo, description, status, admId" +
-                "from product where 1=1";
+        String sql = "select productNo, `name`, category, price, cost, stock,sellQuantity, buyCount, views, ontime, offTime, lastModifiedTime, photoNo, description, status, admId" +
+                " from product where 1=1";
         //where 1=1 sql不會受到影響，方便下面sql拼接
 
         //將SQL參數傳入Map

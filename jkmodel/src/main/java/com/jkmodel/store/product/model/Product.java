@@ -9,7 +9,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productno")
+    @Column(name = "productNo")
     private Integer productNo;
 
     @Column(name = "name")
@@ -27,25 +27,25 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-    @Column(name = "sellquantity")
+    @Column(name = "sellQuantity")
     private Integer sellQuantity;
 
-    @Column(name = "buycount")
+    @Column(name = "buyCount")
     private Integer buyCount;
 
     @Column(name = "views")
     private Integer views;
 
-    @Column(name = "ontime")
+    @Column(name = "onTime")
     private Timestamp onTime;
 
-    @Column(name = "offtime")
+    @Column(name = "offTime")
     private Timestamp offTime;
 
-    @Column(name = "lastmodifiedtime")
+    @Column(name = "lastModifiedTime")
     private Timestamp lastModifiedTime;
 
-    @Column(name = "photono")
+    @Column(name = "photoNo")
     private Integer photoNo;
 
     @Column(name = "description")
@@ -54,7 +54,7 @@ public class Product {
     @Column(name = "status")
     private Boolean status;
 
-    @Column(name = "admid")
+    @Column(name = "admId")
     private Integer admId;
 
     public Integer getProductNo() {

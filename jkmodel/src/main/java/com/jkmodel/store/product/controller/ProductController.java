@@ -4,7 +4,6 @@ import com.jkmodel.store.product.QueryParams.ProductQueryParams;
 import com.jkmodel.store.product.model.Product;
 import com.jkmodel.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,7 +66,7 @@ public class ProductController {
     public ResponseEntity<Iterable<Product>> findAll(
             @RequestParam(required = false) String search,                      //關鍵字
             @RequestParam(required = false) String category,                    //種類條件
-            @RequestParam(defaultValue = "createdDate") String orderBy,         //預設排序條件
+            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,         //預設排序條件
             @RequestParam(defaultValue = "desc") String sort,                   //預設排序方式
             @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit, //呈現資料筆數
             @RequestParam(defaultValue = "0") @Min(0) Integer offset){          //跳過幾筆資料
@@ -83,7 +82,12 @@ public class ProductController {
         productQueryParams.setOffset(offset);
 
         Iterable<Product> products = productService.getProducts(productQueryParams);
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+        if(products != null){
+            return ResponseEntity.status(HttpStatus.OK).body(products);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
 }
