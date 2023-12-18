@@ -3,58 +3,58 @@ package com.jkmodel.store.product.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-//@Entity
-//@Table(name = "product")
+@Entity
+@Table(name = "product")
 public class Product {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "productNo")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productNo")
     private Integer productNo;
 
-//    @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-//    @Column(name = "category")
+    @Column(name = "category")
     private String category;
 
-//    @Column(name = "price")
+    @Column(name = "price")
     private Double price;
 
-//    @Column(name = "cost")
+    @Column(name = "cost")
     private Double cost;
 
-//    @Column(name = "stock")
+    @Column(name = "stock")
     private Integer stock;
 
-//    @Column(name = "sellQuantity")
+    @Column(name = "sellQuantity")
     private Integer sellQuantity;
 
-//    @Column(name = "buyCount")
+    @Column(name = "buyCount")
     private Integer buyCount;
 
-//    @Column(name = "views")
+    @Column(name = "views")
     private Integer views;
 
-//    @Column(name = "onTime")
+    @Column(name = "onTime")
     private Timestamp onTime;
 
-//    @Column(name = "offTime")
+    @Column(name = "offTime")
     private Timestamp offTime;
 
-//    @Column(name = "lastModifiedTime")
+    @Column(name = "lastModifiedTime")
     private Timestamp lastModifiedTime;
 
-//    @Column(name = "photoNo")
+    @Column(name = "photoNo")
     private Integer photoNo;
 
-//    @Column(name = "description")
+    @Column(name = "description")
     private String description;
 
-//    @Column(name = "status")
+    @Column(name = "status")
     private Boolean status;
 
-//    @Column(name = "admId")
+    @Column(name = "admId")
     private Integer admId;
 
     public Integer getProductNo() {

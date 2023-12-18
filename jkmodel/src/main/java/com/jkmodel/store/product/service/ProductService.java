@@ -1,11 +1,15 @@
 package com.jkmodel.store.product.service;
 
-import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.model.Product;
 
 public interface ProductService {
 
-    Product getProductByNo(Integer productNo);
+    void save(Product product);
 
-    Integer insert(ProductRequest productRequest);
+    void deleteById(Integer productNo);
+
+    Product getById(Integer productNo);
+    
+
+
 }
