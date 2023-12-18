@@ -1,30 +1,23 @@
 package com.jkmodel.store.product.service;
 
-import com.jkmodel.store.product.dao.ProductDao;
-import com.jkmodel.store.product.dto.ProductRequest;
+
 import com.jkmodel.store.product.model.Product;
 import com.jkmodel.store.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
+
 
 @Component
-public class ProductServiceImpl{
+public class ProductServiceImpl implements ProductService{
 
     @Autowired
     private ProductRepository productRepository;
 
-    public List<Product> findALL(){
-        Iterable<Product> productIterable = productRepository.findAll();
-        List<Product> products = new ArrayList<>();
-
-        for (Product product : productIterable) {
-            products.add(product);
-        }
-        return products;
+    @Override
+    public Product findById(Integer productNo) {
+        Optional<Product> product = productRepository.findById(productNo);
+        return product.orElse(null);
     }
-
 }
