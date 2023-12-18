@@ -1,24 +1,60 @@
 package com.jkmodel.store.product.model;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "product")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productNo")
     private Integer productNo;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "category")
     private String category;
+
+    @Column(name = "price")
     private Double price;
+
+    @Column(name = "cost")
     private Double cost;
+
+    @Column(name = "stock")
     private Integer stock;
+
+    @Column(name = "sellQuantity")
     private Integer sellQuantity;
+
+    @Column(name = "buyCount")
     private Integer buyCount;
+
+    @Column(name = "views")
     private Integer views;
+
+    @Column(name = "onTime")
     private Timestamp onTime;
+
+    @Column(name = "offTime")
     private Timestamp offTime;
+
+    @Column(name = "lastModifiedTime")
     private Timestamp lastModifiedTime;
-    private InstantiationError photoNo;
+
+    @Column(name = "photoNo")
+    private Integer photoNo;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "status")
     private Boolean status;
+
+    @Column(name = "admId")
     private Integer admId;
 
     public Integer getProductNo() {
@@ -117,11 +153,11 @@ public class Product {
         this.lastModifiedTime = lastModifiedTime;
     }
 
-    public InstantiationError getPhotoNo() {
+    public Integer getPhotoNo() {
         return photoNo;
     }
 
-    public void setPhotoNo(InstantiationError photoNo) {
+    public void setPhotoNo(Integer photoNo) {
         this.photoNo = photoNo;
     }
 
