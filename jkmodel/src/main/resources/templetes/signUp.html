@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Male_Fashion Template" />
+    <meta name="keywords" content="Male_Fashion, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Css Styles -->
+    <link
+      rel="stylesheet"
+      href="../static/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/font-awesome.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/elegant-icons.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/magnific-popup.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/nice-select.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/owl.carousel.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/slicknav.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" />
+  </head>
+
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Header Begin -->
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-3">
+            <a
+              href="../templetes/index.html"
+              class="header__logo"
+              style="
+                text-decoration: none;
+                font-family: 'Arial', sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                text-shadow: 1px 1px 1px #666;
+                cursor: pointer;
+                display: inline-block;
+              "
+            >
+              JKmodel
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <nav class="header__menu mobile-menu">
+              <ul>
+                <li><a href="../templetes/index.html">首頁</a></li>
+                <li class="active">
+                  <a href="../templetes/shop.html">商城</a>
+                </li>
+                <li class="shop__sidebar__search">
+                  <form action="#">
+                    <input type="text" placeholder="搜尋商品..." />
+                    <button type="submit">
+                      <span class="icon_search"></span>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <div class="header__nav__option">
+              <a href="../templetes/collection.html"
+                ><img src="../static/images/icon/heart.png" alt=""
+              /></a>
+              <a href="../templetes/shopping-cart.html"
+                ><img src="../static/images/icon/cart.png" alt="" />
+                <span id="shoppingCartCount"></span
+              ></a>
+              <span id="shoppingCartPrice">元</span>
+              <a href="../templetes/signIn.html"
+                ><i
+                  class="fa-regular fa-user"
+                  style="color: #000000; margin-left: 10px"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="canvas__open"><i class="fa fa-bars"></i></div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- ===================================================== -->
+    <!-- ***************************************************** -->
+
+    <section class="mb-6 mt-5 p-t-250">
+      <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0">
+              <div class="card-header text-center pt-4">
+                <h5>註冊</h5>
+                <p class="mb-0 text-lead text-black">請填入以下資訊進行註冊</p>
+              </div>
+              <div class="card-body" id="register">
+                <form role="form text-left" id="regiester_form">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      placeholder="請輸入名字(中/英文至少三字元，不可包含標點符號、數字)"
+                      aria-label="Name"
+                      aria-describedby="name-addon"
+                      required="required"
+                      pattern="^[\u4e00-\u9fa5a-zA-Z]{2,10}$"
+                      oninput="setCustomValidity('');"
+                      oninvalid="setCustomValidity('請輸入正確的姓名格式:中/英至少三個字元');"
+                      ;
+                    />
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <h5 class="mb-3">性別：</h5>
+                      <div class="input-group">
+                        <select
+                          class="form-select"
+                          id="gender"
+                          aria-label="Gender"
+                          required
+                        >
+                          <option value="" disabled selected>請選擇性別</option>
+                          <option value="1">男</option>
+                          <option value="2">女</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="birthday"
+                      placeholder="請輸入生日"
+                      aria-label="Birthdate"
+                      aria-describedby="birthdate-addon"
+                      required="required"
+                      min="1900-01-01"
+                      max="2100-01-01"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      placeholder="請輸入電話"
+                      aria-label="Phone"
+                      aria-describedby="phone-addon"
+                      required="required"
+                      pattern="09\d{8}"
+                      oninput="setCustomValidity('');"
+                      oninvalid="setCustomValidity('請輸入正確的電話格式:須以09開頭，共十碼數字');"
+                      ;
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      placeholder="請輸入地址"
+                      aria-label="Address"
+                      aria-describedby="address-addon"
+                      required="required"
+                      pattern="09\d{8}"
+                      oninput="setCustomValidity('');"
+                      ;
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="請輸入Email"
+                      aria-label="Email"
+                      aria-describedby="email-addon"
+                      required="required"
+                      pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="password"
+                      name="password"
+                      class="form-control"
+                      type="password"
+                      placeholder="設定密碼(格式:含英數至少3個字元)"
+                      required="required"
+                      pattern="^(?=.*[a-zA-Z][0-9])(?=.*).{3,}$"
+                      oninput="setCustomValidity('');"
+                      oninvalid="setCustomValidity('請輸入正確的密碼格式:含英數至少三個字元');"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="ConfirmPassword"
+                      name="ConfirmPassword"
+                      class="form-control"
+                      type="password"
+                      placeholder="確認密碼"
+                      required="required"
+                      oninput="setCustomValidity('');"
+                      onchange="if($('#password').val()!=$('#ConfirmPassword').val()){setCustomValidity('密碼不吻合');}"
+                    />
+                  </div>
+                  <!-- <div class="text-center">
+                      <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2" id="submit">取得驗證碼</button>
+                    </div> -->
+                  <input
+                    type="submit"
+                    value="取得驗證碼"
+                    class="btn bg-gradient-dark w-100 my-4 mb-2"
+                  />
+                  <p class="text-sm mt-3 mb-0">
+                    已經有帳號了?
+                    <a
+                      href="./sign-in.html"
+                      class="text-dark font-weight-bolder"
+                      >點我登入</a
+                    >
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+
+    <!-- Js Plugins -->
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.nice-select.min.js"></script>
+    <script src="../static/js/jquery.nicescroll.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/jquery.countdown.min.js"></script>
+    <script src="../static/js/jquery.slicknav.js"></script>
+    <script src="../static/js/mixitup.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c89374f433.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("#regiester_form").submit(function (e) {
+        e.preventDefault();
+        /*  將 sign-up 資料用物件包裝  */
+        let signUp_item = {
+          name: $("#name").val(),
+          gender: $("#gender").val(),
+          birthday: $("#birthday").val(),
+          phone: $("#phone").val(),
+          address: $("#address").val(),
+          email: $("#email").val(),
+          password: $("#password").val(),
+        };
+        console.log(signUp_item);
+
+        $.ajax({
+          url: "",
+          type: "POST",
+          data: signUp_item,
+          dataType: "json",
+          beforeSend: function (xhr) {
+            console.log("beforesend");
+          },
+          success: function (data) {
+            redirect(data);
+          },
+          complete: function (xhr) {},
+        });
+        function redirect(data) {
+          console.log(data);
+          switch (data.status) {
+            case "duplicateEmail":
+              alert("信箱已重複，請輸入其他信箱！");
+              $("#email").val("");
+              break;
+            case "success":
+              alert("驗證碼已寄到您的信箱，請前往收信並驗證。");
+              location.href = "registration-verification.html";
+              break;
+            case "failed":
+              alert("註冊失敗，帳號已重複，請修正後再提交申請！");
+              $("#account").val("");
+              break;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
