@@ -313,27 +313,28 @@
             console.log("beforesend");
           },
           success: function (data) {
-            redirect(data);
+            console.log(data);
+            // redirect(data);
           },
           complete: function (xhr) {},
         });
-        function redirect(data) {
-          console.log(data);
-          switch (data.status) {
-            case "duplicateEmail":
-              alert("信箱已重複，請輸入其他信箱！");
-              $("#email").val("");
-              break;
-            case "success":
-              alert("驗證碼已寄到您的信箱，請前往收信並驗證。");
-              location.href = "registration-verification.html";
-              break;
-            case "failed":
-              alert("註冊失敗，帳號已重複，請修正後再提交申請！");
-              $("#account").val("");
-              break;
-          }
-        }
+        // function redirect(data) {
+        //   console.log(data);
+        //   switch (data.status) {
+        //     case "duplicateEmail":
+        //       alert("信箱已重複，請輸入其他信箱！");
+        //       $("#email").val("");
+        //       break;
+        //     case "success":
+        //       alert("驗證碼已寄到您的信箱，請前往收信並驗證。");
+        //       location.href = "registration-verification.html";
+        //       break;
+        //     case "failed":
+        //       alert("註冊失敗，帳號已重複，請修正後再提交申請！");
+        //       $("#account").val("");
+        //       break;
+        //   }
+        // }
       });
     </script>
   </body>
