@@ -1,29 +1,37 @@
 package com.jkmodel.store.product.controller;
 
 import com.jkmodel.store.product.QueryParams.ProductQueryParams;
-import com.jkmodel.store.product.model.Product;
+import com.jkmodel.store.product.dto.Product;
+import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.IOException;
+import java.util.List;
+
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    //新增商品
+    // 新增商品，接收圖片文件
     @PostMapping("/products")
-    public ResponseEntity<Product> save(@RequestBody @Valid Product product){
-        System.out.println("執行product save方法");
-        productService.save(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    public ResponseEntity<String> save(@ModelAttribute ProductRequest ProductRequest) {
+        System.out.println("有呼叫controller save方法");
+        productService.saveProductRequest(ProductRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //更新商品

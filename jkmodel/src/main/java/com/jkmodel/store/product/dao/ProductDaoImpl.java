@@ -1,7 +1,7 @@
 package com.jkmodel.store.product.dao;
 
 import com.jkmodel.store.product.QueryParams.ProductQueryParams;
-import com.jkmodel.store.product.model.Product;
+import com.jkmodel.store.product.dto.Product;
 import com.jkmodel.store.product.rowMapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
