@@ -1,7 +1,11 @@
-package com.jkmodel.store.product.model;
+package com.jkmodel.store.product.dto;
+
+import com.jkmodel.store.photo.dto.Photo;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -37,16 +41,13 @@ public class Product {
     private Integer views;
 
     @Column(name = "onTime")
-    private Timestamp onTime;
+    private LocalDateTime onTime;
 
     @Column(name = "offTime")
-    private Timestamp offTime;
+    private LocalDateTime offTime;
 
     @Column(name = "lastModifiedTime")
-    private Timestamp lastModifiedTime;
-
-    @Column(name = "photoNo")
-    private Integer photoNo;
+    private LocalDateTime lastModifiedTime;
 
     @Column(name = "description")
     private String description;
@@ -56,6 +57,9 @@ public class Product {
 
     @Column(name = "admId")
     private Integer admId;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Photo> photos;
 
     public Integer getProductNo() {
         return productNo;
@@ -129,36 +133,28 @@ public class Product {
         this.views = views;
     }
 
-    public Timestamp getOnTime() {
+    public LocalDateTime getOnTime() {
         return onTime;
     }
 
-    public void setOnTime(Timestamp onTime) {
+    public void setOnTime(LocalDateTime onTime) {
         this.onTime = onTime;
     }
 
-    public Timestamp getOffTime() {
+    public LocalDateTime getOffTime() {
         return offTime;
     }
 
-    public void setOffTime(Timestamp offTime) {
+    public void setOffTime(LocalDateTime offTime) {
         this.offTime = offTime;
     }
 
-    public Timestamp getLastModifiedTime() {
+    public LocalDateTime getLastModifiedTime() {
         return lastModifiedTime;
     }
 
-    public void setLastModifiedTime(Timestamp lastModifiedTime) {
+    public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
-    }
-
-    public Integer getPhotoNo() {
-        return photoNo;
-    }
-
-    public void setPhotoNo(Integer photoNo) {
-        this.photoNo = photoNo;
     }
 
     public String getDescription() {
@@ -183,5 +179,13 @@ public class Product {
 
     public void setAdmId(Integer admId) {
         this.admId = admId;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 }
