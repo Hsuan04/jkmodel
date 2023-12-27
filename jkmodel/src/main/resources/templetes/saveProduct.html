@@ -62,6 +62,7 @@
       alert("圖片至少上傳1張，最多上傳4張圖片");
       return;
     }
+    console.log(formData);
 
     $.ajax({
       url: 'http://localhost:8080/products',
@@ -69,9 +70,9 @@
       data: formData,
       processData: false,
       contentType: false,
-      // contentType: 'multipart/form-data',
       success: function(response) {
         console.log('Product added successfully:', response);
+
       },
       error: function(error) {
         console.error('Error adding product:', error);

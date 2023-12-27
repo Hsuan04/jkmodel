@@ -5,17 +5,16 @@ import com.jkmodel.store.product.dto.Product;
 import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,10 +27,34 @@ public class ProductController {
 
     // 新增商品，接收圖片文件
     @PostMapping("/products")
-    public ResponseEntity<String> save(@ModelAttribute ProductRequest ProductRequest) {
+    public ResponseEntity<Product> save(@ModelAttribute @Valid ProductRequest productRequest,
+                                       BindingResult bindingResult) {
         System.out.println("有呼叫controller save方法");
-        productService.saveProductRequest(ProductRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        System.out.println("name: "+ productRequest.getName());
+        System.out.println("category: "+ productRequest.getCategory());
+        System.out.println("price: "+ productRequest.getPrice());
+        System.out.println("stock: "+ productRequest.getStock());
+        System.out.println("cost: "+ productRequest.getCost());
+        System.out.println("ontime: "+ productRequest.getOnTime());
+        System.out.println("offtime: "+ productRequest.getOffTime());
+        System.out.println("description: "+ productRequest.getDescription());
+        System.out.println("status: "+ productRequest.getStatus());
+        System.out.println("photo: "+ productRequest.getPhotos());
+        //錯誤驗證
+//        if (bindingResult.hasErrors()) {
+//            System.out.println("有執行錯誤驗證");
+//            List<String> errors = new ArrayList<>();
+//            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+//                errors.add(fieldError.getDefaultMessage());
+//            }
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.toString());
+//        }
+
+        //新增商品
+        Product saveProduct = productService.saveProductRequest(productRequest);
+
+        System.out.println("有執行新增商品");
+        return ResponseEntity.status(HttpStatus.CREATED).body(saveProduct);
     }
 
     //更新商品

@@ -1,20 +1,30 @@
 package com.jkmodel.store.product.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class ProductRequest {
+
+    @NotBlank(message = "商品名稱不能為空白")
     private String name;
 
     private String category;
 
+    @NotNull(message = "商品價格不能為空白")
+    @DecimalMin(value = "0.00", message = "商品價格最低為0.00")
     private Double price;
 
+    @NotNull(message = "商品成本不能為空白")
+    @DecimalMin(value = "0.00", message = "商品成本最低為0.00")
     private Double cost;
 
+    @NotNull(message = "商品庫存不能為空白")
+    @Min(value = 0, message = "商品庫存最低為0")
     private Integer stock;
 
     private Integer buyCount;
@@ -25,6 +35,7 @@ public class ProductRequest {
 
     private String offTime;
 
+    @NotBlank(message = "商品描述不能為空白")
     private String description;
 
     private Boolean status;

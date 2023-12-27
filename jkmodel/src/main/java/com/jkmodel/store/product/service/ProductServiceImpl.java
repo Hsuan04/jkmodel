@@ -33,25 +33,28 @@ public class ProductServiceImpl implements ProductService{
     private ProductDao productDao;
 
     @Transactional
-    public void saveProductRequest(ProductRequest ProductRequest) {
-        System.out.println("name:" + ProductRequest.getName());
+    public Product saveProductRequest(ProductRequest productRequest) {
         Product product = new Product();
-        product.setName(ProductRequest.getName());
-        product.setCategory(ProductRequest.getCategory());
-        product.setPrice(ProductRequest.getPrice());
-        product.setCost(ProductRequest.getCost());
-        product.setStock(ProductRequest.getStock());
+        product.setName(productRequest.getName());
+        product.setCategory(productRequest.getCategory());
+        product.setPrice(productRequest.getPrice());
+        product.setCost(productRequest.getCost());
+        product.setStock(productRequest.getStock());
+        product.setDescription(productRequest.getDescription());
+        product.setStatus(productRequest.getStatus());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime onTime = LocalDateTime.parse(ProductRequest.getOnTime(),formatter);
-        LocalDateTime offTime = LocalDateTime.parse(ProductRequest.getOffTime(),formatter);
+        LocalDateTime onTime = LocalDateTime.parse(productRequest.getOnTime(),formatter);
+        LocalDateTime offTime = LocalDateTime.parse(productRequest.getOffTime(),formatter);
         product.setOnTime(onTime);
         product.setOffTime(offTime);
+        product.setLastModifiedTime(LocalDateTime.now());
+
         //缺admid
 
         try {
             List<Photo> listP = new ArrayList();
-            List<MultipartFile> photoList = (List<MultipartFile>) ProductRequest.getPhotos();
+            List<MultipartFile> photoList = (List<MultipartFile>) productRequest.getPhotos();
             if(photoList != null){
                 for(int i = 0 ; i < photoList.size() ; i++){
                     Photo photo = new Photo();
@@ -64,8 +67,7 @@ public class ProductServiceImpl implements ProductService{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(product.getName());
-        productRepository.save(product);
+        return productRepository.save(product);
         }
 
 
