@@ -22,6 +22,10 @@ function addProduct() {
         },
         error: function(error) {
             console.error('Error adding product:', error);
+            if (error.status === 400 && error.responseJSON) {
+                // 在各個屬性上顯示錯誤訊息
+                displayErrorMessages(error.responseJSON);
+            }
         }
     });
 }

@@ -30,25 +30,16 @@ public class ProductController {
     public ResponseEntity<Product> save(@ModelAttribute @Valid ProductRequest productRequest,
                                        BindingResult bindingResult) {
         System.out.println("有呼叫controller save方法");
-        System.out.println("name: "+ productRequest.getName());
-        System.out.println("category: "+ productRequest.getCategory());
-        System.out.println("price: "+ productRequest.getPrice());
-        System.out.println("stock: "+ productRequest.getStock());
-        System.out.println("cost: "+ productRequest.getCost());
-        System.out.println("ontime: "+ productRequest.getOnTime());
-        System.out.println("offtime: "+ productRequest.getOffTime());
-        System.out.println("description: "+ productRequest.getDescription());
-        System.out.println("status: "+ productRequest.getStatus());
-        System.out.println("photo: "+ productRequest.getPhotos());
+
         //錯誤驗證
-//        if (bindingResult.hasErrors()) {
-//            System.out.println("有執行錯誤驗證");
-//            List<String> errors = new ArrayList<>();
-//            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-//                errors.add(fieldError.getDefaultMessage());
-//            }
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.toString());
-//        }
+        if (bindingResult.hasErrors()) {
+            System.out.println("有執行錯誤驗證");
+            List<String> errors = new ArrayList<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.add(fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
 
         //新增商品
         Product saveProduct = productService.saveProductRequest(productRequest);
