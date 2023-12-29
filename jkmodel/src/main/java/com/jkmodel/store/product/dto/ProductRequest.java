@@ -31,8 +31,10 @@ public class ProductRequest {
 
     private Integer views;
 
+    @NotNull(message = "上架時間不能為空白")
     private String onTime;
 
+    @NotNull(message = "下架時間不能為空白")
     private String offTime;
 
     @NotBlank(message = "商品描述不能為空白")

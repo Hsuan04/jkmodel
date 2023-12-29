@@ -193,7 +193,9 @@
                             <h6 class="mb-4">新增商品</h6>
                             <form id="productForm" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">商品名稱：</label>
+                                    <label for="name" class="form-label" style="display: flex; align-items: center;">商品名稱：
+                                        <div id="errorName" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
                                     <input class="form-control" type="text" id="name" name="name" required>
                                 </div>
 
@@ -209,28 +211,34 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">商品價格：</label>
+                                    <label for="price" class="form-label" style="display: flex; align-items: center;">商品價格：
+                                        <div id="errorPrice" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
                                     <input type="number" id="price" name="price" required class="form-control">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="cost" class="form-label">商品成本:：</label>
+                                    <label for="cost" class="form-label" style="display: flex; align-items: center;">商品成本：
+                                        <div id="errorCost" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
                                     <input type="number" id="cost" name="cost" required class="form-control">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="stock" class="form-label">商品庫存：</label>
+                                    <label for="stock" class="form-label" style="display: flex; align-items: center;">商品成本：
+                                        <div id="errorStock" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
                                     <input type="number" id="stock" name="stock" required class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="onTime">上架時間：</label>
+                                    <label for="onTime" id="errorOnTime">上架時間：</label>
                                     <input type="datetime-local" id="onTime" name="onTime" class="form-control" required>
                                 </div>
                                 <br>
 
                                 <div class="form-group">
-                                    <label for="offTime">下架時間：</label>
+                                    <label for="offTime" id="errorOffTime">下架時間：</label>
                                     <input type="datetime-local" id="offTime" name="offTime" class="form-control" required>
                                 </div>
                                 <br>
@@ -244,13 +252,20 @@
                                     <label for="status">上下架狀態：</label>
                                 </div>
 
+                                <div id="errorDescription" style="margin-left: 5px;" class="error-message"></div>
                                 <div class="form-floating">
-
                                 <textarea class="form-control" placeholder="Leave a comment here"
                                           id="description" style="height: 150px;" name="description"></textarea>
-                                    <label for="description">商品敘述:</label>
+                                    <label for="description" style="display: inline-block">商品敘述:
+
+                                    </label>
                                 </div>
-                                <br>
+<!--                                    <label for="description">商品敘述:</label>-->
+<!--                                    <div id="errorDescription" style="display: flex; align-items: center; margin-left: 5px;"></div>-->
+<!--                                    <textarea class="form-control" placeholder="Leave a comment here"-->
+<!--                                              id="description" style="height: 150px;" name="description"></textarea>-->
+
+                                    <br>
 
                                 <div class="mb-3">
                                     <label for="productPhotos" class="form-label">商品圖片:</label>
