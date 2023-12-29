@@ -1,5 +1,6 @@
 //新增商品
-function addProduct() {
+function addProduct(event) {
+    // event.preventDefault();
     var formData = new FormData($('#productForm')[0]);
 
     // 檢查圖片數量
@@ -18,10 +19,15 @@ function addProduct() {
         // contentType: 'multipart/form-data',
         success: function(response) {
             console.log('Product added successfully:', response);
-            console.log(formData);
+            console.log("response.cost:" + response.cost);
+            console.log("成功");
+            if (response === "added success") {
+                window.location.href = 'https://www.google.com';
+            }
         },
         error: function(error) {
             console.error('Error adding product:', error);
+            console.log("失敗");
             if (error.status === 400 && error.responseJSON) {
                 // 在各個屬性上顯示錯誤訊息
                 displayErrorMessages(error.responseJSON);

@@ -32,6 +32,9 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private PhotoRepository photoRepository;
+
     @Transactional
     public Product saveProductRequest(ProductRequest productRequest) {
         Product product = new Product();
@@ -54,7 +57,7 @@ public class ProductServiceImpl implements ProductService{
 
         try {
             List<Photo> listP = new ArrayList();
-            List<MultipartFile> photoList = (List<MultipartFile>) productRequest.getPhotos();
+            List<MultipartFile> photoList = productRequest.getPhotos();
             if(photoList != null){
                 for(int i = 0 ; i < photoList.size() ; i++){
                     Photo photo = new Photo();
@@ -94,6 +97,44 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product findById(Integer productNo) {
         Product product = productRepository.findById(productNo).orElse(null);
+        return product;
+    }
+
+    @Override
+    public Product findProduct(Integer productNo) {
+        //回傳圖片格式？需要創建一個ProductResponse，photo屬性為List<Photo>？還是可以直接使用MultipartFile回傳？
+        //
+        Product product = productRepository.findById(productNo).orElse(null);
+
+        //=========是否有需要回傳ProductRequest?==========
+//        List<Photo> photoList = photoRepository.findAllByProductNo(productNo);
+        List<MultipartFile> multipartFileList = new ArrayList<>();
+
+//        for(int i = 0 ; i < photoList.size() ; i++);{
+//            Photo photo = photoList.get(i);
+//            MultipartFile multipartFile = convert(photo.getPhoto(), "photo" + (i + 1) + ".jpg", "image/jpeg");
+//            multipartFileList.add(multipartFile);
+//        }
+
+        ProductRequest productRequest = new ProductRequest();
+        if(product != null){
+
+            productRequest.setName(product.getName());
+            productRequest.setCategory(product.getCategory());
+            productRequest.setPrice(product.getPrice());
+            productRequest.setCost(product.getCost());
+            productRequest.setStock(product.getStock());
+            productRequest.setOnTime(product.getOnTime().toString());
+            productRequest.setOffTime(product.getOffTime().toString());
+            productRequest.setDescription(product.getDescription());
+            productRequest.setPhotos(multipartFileList);
+
+            List<Photo> list = new ArrayList<>();
+
+
+
+        }
+
         return product;
     }
 

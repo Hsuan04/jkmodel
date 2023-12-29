@@ -15,7 +15,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -27,25 +29,28 @@ public class ProductController {
 
     // 新增商品，接收圖片文件
     @PostMapping("/products")
-    public ResponseEntity<Product> save(@ModelAttribute @Valid ProductRequest productRequest,
+    public ResponseEntity<?> save(@ModelAttribute @Valid ProductRequest productRequest,
                                        BindingResult bindingResult) {
         System.out.println("有呼叫controller save方法");
 
         //錯誤驗證
         if (bindingResult.hasErrors()) {
             System.out.println("有執行錯誤驗證");
-            List<String> errors = new ArrayList<>();
+            Map<String, String> errors = new HashMap<>();
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                errors.add(fieldError.getDefaultMessage());
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(errors);
         }
 
         //新增商品
         Product saveProduct = productService.saveProductRequest(productRequest);
+        Map<String, String> succesMsg = new HashMap<>();
+        succesMsg.put("訊息","成功新增商品");
 
         System.out.println("有執行新增商品");
-        return ResponseEntity.status(HttpStatus.CREATED).body(saveProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body(succesMsg);
+
     }
 
     //更新商品
@@ -87,10 +92,12 @@ public class ProductController {
     public ResponseEntity<Iterable<Product>> findAll(
             @RequestParam(required = false) String search,                      //關鍵字
             @RequestParam(required = false) String category,                    //種類條件
-            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,         //預設排序條件
+            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,    //預設排序條件
             @RequestParam(defaultValue = "desc") String sort,                   //預設排序方式
-            @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit, //呈現資料筆數
-            @RequestParam(defaultValue = "0") @Min(0) Integer offset){          //跳過幾筆資料
+            @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,//呈現資料筆數
+            @RequestParam(defaultValue = "0") @Min(0) Integer offset,           //跳過幾筆資料
+            @RequestParam(required = false) @Min(0) Integer minPrice,            // 最低價格
+            @RequestParam(required = false) @Min(0) Integer maxPrice){           // 最高價格
 
         System.out.println("執行product findAll方法");
 
@@ -101,6 +108,8 @@ public class ProductController {
         productQueryParams.setSort(sort);
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
+        productQueryParams.setMinPrice(minPrice);
+        productQueryParams.setMaxPrice(maxPrice);
 
         Iterable<Product> products = productService.getProducts(productQueryParams);
         if(products != null){

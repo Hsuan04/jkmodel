@@ -1,15 +1,17 @@
 package com.jkmodel.store.product.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jkmodel.store.photo.dto.Photo;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +60,7 @@ public class Product {
     @Column(name = "admId")
     private Integer admId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Photo> photos;
 
