@@ -16,6 +16,7 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adminId")
+            // admin_id
     Integer adminId;
 
     @Column(name = "name")
@@ -28,8 +29,7 @@ public class Admin {
     String password;
 
 
-    @Column(name = "createdDate", insertable = false, updatable = false)
-    @CreationTimestamp
+    @Column(name = "createdTime", insertable = false, updatable = false)
     Timestamp createdTime;
 
     @Column(name = "productNo", insertable = false)
