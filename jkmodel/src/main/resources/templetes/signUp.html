@@ -206,7 +206,6 @@
                       aria-label="Address"
                       aria-describedby="address-addon"
                       required="required"
-                      pattern="09\d{8}"
                       oninput="setCustomValidity('');"
                       ;
                     />
@@ -305,9 +304,10 @@
         console.log(signUp_item);
 
         $.ajax({
-          url: "",
+          url: "http://localhost:8080/users/register",
           type: "POST",
-          data: signUp_item,
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(signUp_item),
           dataType: "json",
           beforeSend: function (xhr) {
             console.log("beforesend");

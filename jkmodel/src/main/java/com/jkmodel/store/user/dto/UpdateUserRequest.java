@@ -1,21 +1,14 @@
-package com.jkmodel.store.user.entity;
+package com.jkmodel.store.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+public class UpdateUserRequest {
 
-@Entity
-@Table(name = "user")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
     @NotBlank
     private String name;
     @NotBlank
@@ -31,15 +24,6 @@ public class User {
     private String phone;
     @NotBlank
     private String address;
-    private Date createdTime;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getName() {
         return name;
@@ -95,13 +79,5 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
     }
 }
