@@ -5,6 +5,8 @@ import com.jkmodel.store.admin.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class AdminServiceImpl implements AdminService{
 
@@ -20,14 +22,18 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Admin findById(Integer adminId) {
-
-//        Admin findByID =
-        return null;
+    public Optional<Admin> findById(Integer adminId) {
+        return adminRepository.findById(adminId);
     }
 
     @Override
-    public Admin deleteById(Integer adminId) {
-        return null;
+    public Optional<Admin> findByNameAndPassword(String name, String password) {
+        return adminRepository.findByNameAndPassword(name, password);
+    }
+
+    @Override
+    public void deleteById(Integer adminId) {
+        adminRepository.deleteById(adminId);
+
     }
 }

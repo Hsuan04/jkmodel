@@ -1,6 +1,35 @@
 (function ($) {
     "use strict";
 
+
+
+    const userData = {
+        name: 'your_username',
+        password: 'your_password'
+    };
+
+    $.ajax({
+        url: `${window.location.pathname}/logIn`,
+        type: 'post',
+        data: JSON.stringify(userData),
+        contentType: 'application/json',  // 設置 Content-Type 為 JSON
+        dataType: 'json',
+        success: function (data) {
+            // 這裡的 data 是 AJAX 請求的響應，不是上面定義的全域變量 res
+            if (data.result === 0) {
+                // 登入成功的處理邏輯
+                $("#form1").attr("action", contextPath + '/adminForm');
+            } else {
+                // 登入失敗的處理邏輯
+                $.msg.alert("登入失敗");
+            }
+        },
+        error: function () {
+            $.msg.alert("添加異常");
+        }
+    });
+
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {
