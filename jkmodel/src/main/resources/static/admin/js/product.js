@@ -9,7 +9,6 @@ function addProduct() {
         alert("圖片至少上傳1張，最多上傳4張圖片");
         return;
     }
-
     // 清空所有錯誤訊息
     clearErrorMessages();
 
@@ -19,36 +18,22 @@ function addProduct() {
         data: formData,
         processData: false,
         contentType: false,
-        // contentType: 'multipart/form-data',
+
         success: function(response) {
             console.log('Product added successfully:', response);
-            // 錯誤訊息
-            // if (response.name !== undefined && response.name !== null) {
-            //     $("#errorName").append('<label for="name" class="form-label" style="color: red;">' + response.name + '</label>');
-            // }
-            // if (response.price !== undefined && response.price !== null) {
-            //     $("#errorPrice").append('<label for="price" class="form-label" style="color: red;">' + response.price + '</label>');
-            // }
-            // if (response.cost !== undefined && response.cost !== null) {
-            //     $("#errorCost").append('<label for="cost" class="form-label" style="color: red;">' + response.cost + '</label>');
-            // }
-            // if (response.stock !== undefined && response.stock !== null) {
-            //     $("#errorStock").append('<label for="stock" class="form-label" style="color: red;">' + response.stock + '</label>');
-            // }
-            // if (response.description !== undefined && response.description !== null) {
-            //     $("#errorDescription").append('<label for="description" class="form-label" style="color: red;">' + response.description + '</label>');
-            // }
 
+            // 錯誤訊息
             displayError('name', response.name);
             displayError('price', response.price);
             displayError('cost', response.cost);
             displayError('stock', response.stock);
             displayError('description', response.description);
 
-            console.log("成功");
-            // if (response === "added success") {
-            //     window.location.href = 'https://www.google.com';
-            // }
+            if (response.message === "成功新增商品") {
+                alert("新增商品成功！");
+                // 可以根據需要進行其他操作，例如跳轉頁面
+                // window.location.href = 'https://www.google.com';
+            }
         },
         error: function(error) {
             console.error('Error adding product:', error);

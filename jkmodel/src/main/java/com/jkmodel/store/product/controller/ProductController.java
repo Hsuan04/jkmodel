@@ -5,6 +5,7 @@ import com.jkmodel.store.product.dto.Product;
 import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // 新增商品，接收圖片文件
+    // 新增商品
     @PostMapping("/products")
     public ResponseEntity<?> save(@ModelAttribute @Valid ProductRequest productRequest,
                                        BindingResult bindingResult) {
@@ -43,14 +45,17 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.CREATED).body(errors);
         }
 
-        //新增商品
-        Product saveProduct = productService.saveProductRequest(productRequest);
+        // 新增商品
+        productService.saveProductRequest(productRequest);
+
+        // 建立成功新增商品訊息
         Map<String, String> succesMsg = new HashMap<>();
-        succesMsg.put("訊息","成功新增商品");
+        succesMsg.put("message", "成功新增商品");
 
-        System.out.println("有執行新增商品");
-        return ResponseEntity.status(HttpStatus.CREATED).body(succesMsg);
-
+        // 設定定向到網頁網址
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("https://www.google.com"));
+        return new ResponseEntity<>(succesMsg, headers, HttpStatus.FOUND);
     }
 
     //更新商品
