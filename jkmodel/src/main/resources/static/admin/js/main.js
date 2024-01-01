@@ -1,34 +1,40 @@
 (function ($) {
     "use strict";
 
+    //宣告變數(按鈕)
+    var logIn = $('#logIn');
+    //當按鈕觸發點擊時會取出前端name, 及password的值
+    logIn.click(function() {
+        var name = $("#floatingInput").val(); // 获取输入框的值
+        var pass = $("#floatingPassword").val(); // 获取输入框的值
 
-
-    const userData = {
-        name: 'your_username',
-        password: 'your_password'
-    };
-
+    //再將取到的值放到物件並用jason格式
+        var userData = {
+            name: name,
+            password: pass
+        };
+    //用ajax傳輸
     $.ajax({
-        url: `${window.location.pathname}/logIn`,
-        type: 'post',
-        data: JSON.stringify(userData),
-        contentType: 'application/json',  // 設置 Content-Type 為 JSON
-        dataType: 'json',
+        url: `http://localhost:8080/logIn`,//資料請求網址
+        type: 'post',//請求的方法
+        data: JSON.stringify(userData),//物件的資料轉為string(裡面的userData需要符合對應的Dto資料規格ex:name, password)
+        contentType: 'application/json',  // 向後端通知 Content-Type 為 JSON
+        dataType: 'json',//資料格式為jason
         success: function (data) {
-            // 這裡的 data 是 AJAX 請求的響應，不是上面定義的全域變量 res
-            if (data.result === 0) {
+            // 成功時回應頁面
+
                 // 登入成功的處理邏輯
-                $("#form1").attr("action", contextPath + '/adminForm');
-            } else {
-                // 登入失敗的處理邏輯
-                $.msg.alert("登入失敗");
-            }
+                // $("#form1").attr("action", contextPath + '/adminForm');
+                //url路徑+data的id(controller login對應的id)
+                window.location.href = `./adminForm.html?id=${data.adminId}`;
+
         },
         error: function () {
             $.msg.alert("添加異常");
         }
-    });
 
+    });
+    })
 
     // Spinner
     var spinner = function () {

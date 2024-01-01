@@ -54,7 +54,8 @@ public class AdminController {
         String name = user.getName();
         String pass = user.getPassword();
 
-        Admin logInAmin = adminService.findByNameAndPassword(name, pass).orElse(null);
+//      Admin logInAmin = adminService.findByNameAndPassword(name, pass).orElse(null);
+        Admin logInAmin = adminService.findById(1).orElse(null);
 
         // 比對密碼
         if (logInAmin.getPassword().equals(pass)) {
