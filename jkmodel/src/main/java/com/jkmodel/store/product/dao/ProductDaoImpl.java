@@ -20,8 +20,7 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
         //SQL語法
-        String sql = "select productNo, `name`, category, price, cost, stock,sellQuantity, buyCount, views, ontime, offTime, lastModifiedTime, description, status, admId" +
-                " from product where 1=1";
+        String sql = "SELECT p.productNo, p.name, p.category, p.price, p.cost, p.stock, p.sellQuantity, p.buyCount, p.views, p.onTime, p.offTime, p.lastModifiedTime, p.description, p.status, p.admId, ph.photo AS photo FROM product p LEFT JOIN ( SELECT productNo, MIN(photoNo) AS minPhotoNo FROM photo GROUP BY productNo ) minPh ON p.productNo = minPh.productNo LEFT JOIN photo ph ON minPh.productNo = ph.productNo AND minPh.minPhotoNo = ph.photoNo where 1=1";
         //where 1=1 sql不會受到影響，方便下面sql拼接
 
         //將SQL參數傳入Map
@@ -29,24 +28,24 @@ public class ProductDaoImpl implements ProductDao{
 
         //分類：sql加上種類條件
         if(productQueryParams.getCategory() != null){
-            sql = sql + " AND category = :category";                 //特別注意 and 之前一定要有一格空白
+            sql = sql + " AND p.category = :category";                 //特別注意 and 之前一定要有一格空白
             map.put("category", productQueryParams.getCategory());   //特別注意 Enum類型要轉成字串
         }
 
         //查詢條件：sql加上搜尋條件(模糊查詢)
         if(productQueryParams.getSearch() != null){
-            sql = sql + " AND name LIKE :name";
+            sql = sql + " AND p.name LIKE :name";
             map.put("name", "%" + productQueryParams.getSearch() + "%"); //模糊查詢要加在map裡面，不能寫在sql裡
         }
 
         // 價格範圍：SQL加上價格區間條件
         if (productQueryParams.getMinPrice() != null) {
-            sql += " AND price >= :minPrice";
+            sql += " AND p.price >= :minPrice";
             map.put("minPrice", productQueryParams.getMinPrice());
         }
 
         if (productQueryParams.getMaxPrice() != null) {
-            sql += " AND price <= :maxPrice";
+            sql += " AND p.price <= :maxPrice";
             map.put("maxPrice", productQueryParams.getMaxPrice());
         }
 

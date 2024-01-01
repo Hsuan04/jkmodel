@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Entity
@@ -63,6 +64,10 @@ public class Product implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Photo> photos;
+
+    private byte[] firstPhotoByte;
+
+    private String firstPhotoString;
 
     public Integer getProductNo() {
         return productNo;
@@ -190,5 +195,21 @@ public class Product implements Serializable {
 
     public void setPhotos(List<Photo> photos) {
         this.photos = photos;
+    }
+
+    public byte[] getFirstPhotoByte() {
+        return firstPhotoByte;
+    }
+
+    public void setFirstPhotoByte(byte[] firstPhotoByte) {
+        this.firstPhotoByte = firstPhotoByte;
+    }
+
+    public String getFirstPhotoString() {
+        return firstPhotoString;
+    }
+
+    public void setFirstPhotoString(String firstPhotoString) {
+        this.firstPhotoString = firstPhotoString;
     }
 }

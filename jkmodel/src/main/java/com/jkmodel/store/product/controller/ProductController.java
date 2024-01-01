@@ -94,7 +94,7 @@ public class ProductController {
 
     //取得所有商品(搜尋、種類、排序)
     @GetMapping("/products")
-    public ResponseEntity<Iterable<Product>> findAll(
+    public ResponseEntity<Iterable<?>> findAll(
             @RequestParam(required = false) String search,                      //關鍵字
             @RequestParam(required = false) String category,                    //種類條件
             @RequestParam(defaultValue = "lastModifiedTime") String orderBy,    //預設排序條件
