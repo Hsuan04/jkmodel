@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
         //SQL語法
-        String sql = "select productNo, `name`, category, price, cost, stock,sellQuantity, buyCount, views, ontime, offTime, lastModifiedTime, photoNo, description, status, admId" +
+        String sql = "select productNo, `name`, category, price, cost, stock,sellQuantity, buyCount, views, ontime, offTime, lastModifiedTime, description, status, admId" +
                 " from product where 1=1";
         //where 1=1 sql不會受到影響，方便下面sql拼接
 
@@ -37,6 +37,17 @@ public class ProductDaoImpl implements ProductDao{
         if(productQueryParams.getSearch() != null){
             sql = sql + " AND name LIKE :name";
             map.put("name", "%" + productQueryParams.getSearch() + "%"); //模糊查詢要加在map裡面，不能寫在sql裡
+        }
+
+        // 價格範圍：SQL加上價格區間條件
+        if (productQueryParams.getMinPrice() != null) {
+            sql += " AND price >= :minPrice";
+            map.put("minPrice", productQueryParams.getMinPrice());
+        }
+
+        if (productQueryParams.getMaxPrice() != null) {
+            sql += " AND price <= :maxPrice";
+            map.put("maxPrice", productQueryParams.getMaxPrice());
         }
 
         //排序：注意！order by 要用字串拼接方式

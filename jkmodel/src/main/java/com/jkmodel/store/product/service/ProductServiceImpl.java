@@ -32,26 +32,32 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private PhotoRepository photoRepository;
+
     @Transactional
-    public void saveProductRequest(ProductRequest ProductRequest) {
-        System.out.println("name:" + ProductRequest.getName());
+    public Product saveProductRequest(ProductRequest productRequest) {
         Product product = new Product();
-        product.setName(ProductRequest.getName());
-        product.setCategory(ProductRequest.getCategory());
-        product.setPrice(ProductRequest.getPrice());
-        product.setCost(ProductRequest.getCost());
-        product.setStock(ProductRequest.getStock());
+        product.setName(productRequest.getName());
+        product.setCategory(productRequest.getCategory());
+        product.setPrice(productRequest.getPrice());
+        product.setCost(productRequest.getCost());
+        product.setStock(productRequest.getStock());
+        product.setDescription(productRequest.getDescription());
+        product.setStatus(productRequest.getStatus());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime onTime = LocalDateTime.parse(ProductRequest.getOnTime(),formatter);
-        LocalDateTime offTime = LocalDateTime.parse(ProductRequest.getOffTime(),formatter);
+        LocalDateTime onTime = LocalDateTime.parse(productRequest.getOnTime(),formatter);
+        LocalDateTime offTime = LocalDateTime.parse(productRequest.getOffTime(),formatter);
         product.setOnTime(onTime);
         product.setOffTime(offTime);
+        product.setLastModifiedTime(LocalDateTime.now());
+
         //缺admid
 
         try {
             List<Photo> listP = new ArrayList();
-            List<MultipartFile> photoList = (List<MultipartFile>) ProductRequest.getPhotos();
+            List<MultipartFile> photoList = productRequest.getPhotos();
             if(photoList != null){
                 for(int i = 0 ; i < photoList.size() ; i++){
                     Photo photo = new Photo();
@@ -64,8 +70,7 @@ public class ProductServiceImpl implements ProductService{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(product.getName());
-        productRepository.save(product);
+        return productRepository.save(product);
         }
 
 
@@ -92,6 +97,44 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product findById(Integer productNo) {
         Product product = productRepository.findById(productNo).orElse(null);
+        return product;
+    }
+
+    @Override
+    public Product findProduct(Integer productNo) {
+        //回傳圖片格式？需要創建一個ProductResponse，photo屬性為List<Photo>？還是可以直接使用MultipartFile回傳？
+        //
+        Product product = productRepository.findById(productNo).orElse(null);
+
+        //=========是否有需要回傳ProductRequest?==========
+//        List<Photo> photoList = photoRepository.findAllByProductNo(productNo);
+        List<MultipartFile> multipartFileList = new ArrayList<>();
+
+//        for(int i = 0 ; i < photoList.size() ; i++);{
+//            Photo photo = photoList.get(i);
+//            MultipartFile multipartFile = convert(photo.getPhoto(), "photo" + (i + 1) + ".jpg", "image/jpeg");
+//            multipartFileList.add(multipartFile);
+//        }
+
+        ProductRequest productRequest = new ProductRequest();
+        if(product != null){
+
+            productRequest.setName(product.getName());
+            productRequest.setCategory(product.getCategory());
+            productRequest.setPrice(product.getPrice());
+            productRequest.setCost(product.getCost());
+            productRequest.setStock(product.getStock());
+            productRequest.setOnTime(product.getOnTime().toString());
+            productRequest.setOffTime(product.getOffTime().toString());
+            productRequest.setDescription(product.getDescription());
+            productRequest.setPhotos(multipartFileList);
+
+            List<Photo> list = new ArrayList<>();
+
+
+
+        }
+
         return product;
     }
 
