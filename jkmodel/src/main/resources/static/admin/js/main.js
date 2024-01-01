@@ -22,12 +22,8 @@
         dataType: 'json',//資料格式為jason
         success: function (data) {
             // 成功時回應頁面
-
-                // 登入成功的處理邏輯
-                // $("#form1").attr("action", contextPath + '/adminForm');
                 //url路徑+data的id(controller login對應的id)
-                window.location.href = `./adminForm.html?id=${data.adminId}`;
-
+                window.location.href = `./table.html?id=${data.adminId}`;
         },
         error: function () {
             $.msg.alert("添加異常");
