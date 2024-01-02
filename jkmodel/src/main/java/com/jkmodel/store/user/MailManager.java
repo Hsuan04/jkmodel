@@ -1,6 +1,7 @@
 package com.jkmodel.store.user;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -9,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
 
+@Component
 public class MailManager {
     Session mailSession;
 
