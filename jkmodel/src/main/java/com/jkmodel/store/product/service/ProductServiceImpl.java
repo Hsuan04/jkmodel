@@ -80,11 +80,9 @@ public class ProductServiceImpl implements ProductService{
         Optional<Product> optionalProduct = productRepository.findById(productNo);
 
         photoRepository.deleteAllByProductNo(productNo);
-        System.out.println("刪除要更新的商品圖片");
 
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
-//            existingProduct.setProductNo(productNo);
             existingProduct.setName(productRequest.getName());
             existingProduct.setCategory(productRequest.getCategory());
             existingProduct.setPrice(productRequest.getPrice());
@@ -98,7 +96,6 @@ public class ProductServiceImpl implements ProductService{
             existingProduct.setOnTime(onTime);
             existingProduct.setOffTime(offTime);
             existingProduct.setLastModifiedTime(LocalDateTime.now());
-            System.out.println("更新商品資訊成功");
 
             try {
                 List<Photo> listP = new ArrayList();
@@ -115,7 +112,6 @@ public class ProductServiceImpl implements ProductService{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("更新圖片成功");
             productRepository.save(existingProduct);
             System.out.println("更新商品與圖片成功");
         }
@@ -125,12 +121,9 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product update(Integer productNo, Product product) {
         Optional<Product> optionalProduct = productRepository.findById(productNo);
-
         Product savedProduct = null;
-
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
-
             product.setProductNo(productNo);
             savedProduct = productRepository.save(product);
         }

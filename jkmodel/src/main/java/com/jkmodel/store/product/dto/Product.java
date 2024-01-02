@@ -1,5 +1,6 @@
 package com.jkmodel.store.product.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jkmodel.store.photo.dto.Photo;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,12 +45,15 @@ public class Product implements Serializable {
     private Integer views;
 
     @Column(name = "onTime")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime onTime;
 
     @Column(name = "offTime")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime offTime;
 
     @Column(name = "lastModifiedTime")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastModifiedTime;
 
     @Column(name = "description")

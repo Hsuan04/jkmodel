@@ -33,11 +33,10 @@ public class ProductController {
     @PostMapping("/products")
     public ResponseEntity<?> save(@ModelAttribute @Valid ProductRequest productRequest,
                                        BindingResult bindingResult) {
-        System.out.println("有呼叫controller save方法");
+//        System.out.println("有呼叫controller save方法");
 
         //錯誤驗證
         if (bindingResult.hasErrors()) {
-            System.out.println("有執行錯誤驗證");
             Map<String, String> errors = new HashMap<>();
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 errors.put(fieldError.getField(), fieldError.getDefaultMessage());
@@ -63,6 +62,8 @@ public class ProductController {
     public ResponseEntity<?> update(@PathVariable Integer productNo,
                                     @ModelAttribute @Valid ProductRequest productRequest,
                                     BindingResult bindingResult) {
+//        System.out.println("有呼叫controller update方法");
+
         //錯誤驗證
         if (bindingResult.hasErrors()) {
             System.out.println("有執行錯誤驗證");
@@ -72,16 +73,7 @@ public class ProductController {
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(errors);
         }
-
-        System.out.println("準備執行controller update方法");
         productService.updateProductRequest(productNo, productRequest);
-        System.out.println("執行controller update方法");
-
-//        if (updatedProduct != null) {
-//            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
         return null;
     }
 
@@ -131,12 +123,11 @@ public class ProductController {
         productQueryParams.setMaxPrice(maxPrice);
 
         Iterable<Product> products = productService.getProducts(productQueryParams);
+
         if(products != null){
             return ResponseEntity.status(HttpStatus.OK).body(products);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
     }
-
 }
