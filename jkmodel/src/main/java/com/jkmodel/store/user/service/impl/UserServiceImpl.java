@@ -1,5 +1,6 @@
 package com.jkmodel.store.user.service.impl;
 
+import com.jkmodel.store.user.MailManager;
 import com.jkmodel.store.user.dao.UserDao;
 import com.jkmodel.store.user.dto.LoginRequest;
 import com.jkmodel.store.user.dto.UpdateUserRequest;
@@ -7,19 +8,28 @@ import com.jkmodel.store.user.entity.User;
 import com.jkmodel.store.user.repository.UserRepository;
 import com.jkmodel.store.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private MailManager mailManager;
+
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public User login(LoginRequest loginRequest) {
@@ -56,7 +66,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(hashPassword);
 
         //創建帳號
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        // 發送註冊確認郵件
+        sendRegistrationConfirmationEmail(savedUser.getEmail());
+
+        return savedUser;
     }
 
     @Override
@@ -95,4 +110,51 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    private void sendRegistrationConfirmationEmail(String userEmail) {
+        // 自定義郵件內容和參數
+        String from = "jimmymomo123@gmail.com"; // 發送者的電子郵件
+
+        List<String> sendTo = Collections.singletonList(userEmail);
+        List<String> cc = Collections.emptyList();
+        List<String> bcc = Collections.emptyList();
+        String personal = "JKModel Shop";
+        String subject = "Registration Confirmation";
+        String verificationCode = getVerificationCode();
+        String context = "Thank you for registering!\n\n" + "驗證碼如下：\n[" + verificationCode + "]"; // 自定義郵件內容
+
+        // 調用注入的 MailManager 的 sentMail 方法
+        mailManager.sentMail(from, sendTo, cc, bcc, personal, subject, context);
+
+        // 將驗證碼儲存在 Redis 中，有效期為一定時間（例如 10 分鐘）
+        redisTemplate.opsForValue().set("verificationCode:" + userEmail, verificationCode, 10, TimeUnit.MINUTES);
+
+
+    }
+
+    public String getVerificationCode() {
+
+        StringBuilder sb = new StringBuilder();
+
+
+        // 產生驗證碼
+        for (int i = 0; i < 8; i++) {
+            switch ((int) (Math.random() * 3)) {
+                case 0:
+                    sb.append((int) (Math.random() * 10));
+                    break;
+                case 1:
+                    sb.append((char) (int) (Math.random() * 26 + 65));
+                    break;
+                case 2:
+                    sb.append((char) (int) (Math.random() * 26 + 97));
+                    break;
+            }
+        }
+
+        String verificationCode = sb.toString();
+
+        return verificationCode;
+    }
+
 }

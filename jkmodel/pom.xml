@@ -79,10 +79,12 @@
             <artifactId>spring-data-redis</artifactId>
         </dependency>
 
-        <!-- Apache Commons Pool -->
+
+        <!-- Java mail -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
         </dependency>
 
     </dependencies>
