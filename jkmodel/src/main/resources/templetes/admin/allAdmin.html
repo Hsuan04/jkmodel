@@ -92,31 +92,38 @@
             <!-- Navbar End -->
 <!-- =============== 內容開始 =============== -->
             <div class="container-fluid pt-4 px-4">
-                <h6 class="mb-4">Responsive Table</h6>
                 <div class="row g-4">
-                    <div class="table-responsive">
-                        <tbody id="admins">
-                        <!--                                        <tr id="admins">-->
-                        <!--                                            <th scope="row" type="text"  id="qdminId">1</th>-->
-                        <!--                                            <td type="text"  id="floatingInput">John</td>-->
-                        <!--                                            <td type="text" id="floatingAccount">Doe</td>-->
-                        <!--                                            <td type="text" id="floatingPassword">jhon@email.com</td>-->
-                        <!--                                            <td type="text" id="createdTime">USA</td>-->
-                        <!--                                            <td type="text" id="productNo">123</td>-->
-                        <!--                                            <td type="text" class="form-control" id=" ">Member</td>-->
-                        <!--                                        </tr>-->
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">姓名</th>
-                                    <th scope="col">信箱</th>
-                                    <th scope="col">密碼</th>
-                                    <th scope="col">建立時間</th>
-                                    <th scope="col">編號</th>
-                                    <!--                                            <th scope="col">Status</th>-->
-                                </tr>
-                            </thead>
-                        <tbody>
+                    <div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4" style="display: inline-block;">會員列表</h6>
+                            <a href="addProduct.html" class="btn btn-primary" style="display: inline-block; margin-left: 40px;">新增商品</a>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">姓名</th>
+                                                <th scope="col">信箱</th>
+                                                <th scope="col">密碼</th>
+                                                <th scope="col">建立時間</th>
+                                                <th scope="col">編號</th>
+                                    <!--        <th scope="col">Status</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admins">
+                <!--                                <tr>-->
+                <!--                                    <th scope="row" type="text"  id="qdminId">1</th>-->
+                <!--                                    <td type="text"  id="floatingInput">John</td>-->
+                <!--                                    <td type="text" id="floatingAccount">Doe</td>-->
+                <!--                                    <td type="text" id="floatingPassword">jhon@email.com</td>-->
+                <!--                                    <td type="text" id="createdTime">USA</td>-->
+                <!--                                    <td type="text" id="productNo">123</td>-->
+                <!--                                    <td type="text" class="form-control" id=" ">Member</td>-->
+                <!--                                </tr>-->
+                                        <tbody>
+                                    </table>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

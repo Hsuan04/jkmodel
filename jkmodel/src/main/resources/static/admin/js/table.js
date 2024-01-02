@@ -29,7 +29,7 @@ $(document).ready(function () {
                 if(item.total!==0) {
                     $('#admins').append(`
                         <tr id="admins">
-                            <th scope="row" type="text" id="adminId">${item.id}</th>
+                            <th scope="row" type="text" id="adminId">${item.adminId}</th>
                             <td type="text" id="floatingInput">${item.name}</td>
                             <td type="text" id="floatingAccount">${item.account}</td>
                             <td type="text" id="floatingPassword">${item.password}</td>

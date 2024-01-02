@@ -23,7 +23,7 @@
         success: function (data) {
             // 成功時回應頁面
                 //url路徑+data的id(controller login對應的id)
-                window.location.href = `./table.html?id=${data.adminId}`;
+                window.location.href = `./allAdmin.html?id=${data.adminId}`;
         },
         error: function () {
             $.msg.alert("添加異常");
