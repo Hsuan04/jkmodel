@@ -95,7 +95,8 @@
         <div class="row g-4">
             <div class="col-12">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">商品管理列表</h6>
+                    <h6 class="mb-4" style="display: inline-block;">商品管理列表</h6>
+                    <a href="addProduct.html" class="btn btn-primary" style="display: inline-block; margin-left: 40px;">新增商品</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -104,39 +105,14 @@
                                 <th scope="col">名稱</th>
                                 <th scope="col">種類</th>
                                 <th scope="col">價格</th>
-                                <th scope="col">上下架狀態</th>
+                                <th scope="col">狀態</th>
                                 <th scope="col">最新修改時間</th>
                                 <th scope="col">更新/刪除</th>
                             </tr>
                             </thead>
+                            <!-- 商品陳列 -->
                             <tbody id="productContainer">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                                <td>USA</td>
-                                <td>123</td>
-                                <td>Member</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                                <td>UK</td>
-                                <td>456</td>
-                                <td>Member</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>jacob@email.com</td>
-                                <td>AU</td>
-                                <td>789</td>
-                                <td>Member</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -205,7 +181,7 @@
     <!-- Template Javascript -->
     <script src="../../static/admin/js/main.js"></script>
 
-    <script src="../../static/admin/js/product.js"></script>
+    <script src="../../static/admin/js/allproduct.js"></script>
 </body>
 
 </html>

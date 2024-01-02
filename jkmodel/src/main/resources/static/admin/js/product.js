@@ -56,3 +56,4 @@ function displayError(property, value) {
         $("#error" + property.charAt(0).toUpperCase() + property.slice(1)).append('<label for="' + property + '" class="form-label" style="color: red;">' + value + '</label>');
     }
 }
+
