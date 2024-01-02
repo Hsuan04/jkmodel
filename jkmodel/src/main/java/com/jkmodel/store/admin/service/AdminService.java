@@ -13,6 +13,8 @@ public interface AdminService {
 
     Optional<Admin> findByNameAndPassword(String name, String password);
 
+    Iterable<Admin> findAll(Admin admin);
+
     void deleteById(Integer adminId);
 
 
