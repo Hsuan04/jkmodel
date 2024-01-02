@@ -1,4 +1,4 @@
-d<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,9 +54,9 @@ d<!DOCTYPE html>
 <!-- =============== 左側列表開始 =============== -->
                 <div class="navbar-nav w-100">
                     <a href="allProduct.html" class="nav-item nav-link "><i class="fa fa-shopping-bag me-2"></i>商品管理</a>
-                    <a href="allUser.html" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>會員管理</a>
-                    <a href="allCoupon.html" class="nav-item nav-link"><i class="fa fa-tags me-2"></i>優惠卷管理</a>
-                    <a href="allAdmin.html" class="nav-item nav-link"><i class="fa fa-cogs me-2"></i>管理者管理</a>
+                    <a href="user.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>會員管理</a>
+                    <a href="coupon.html" class="nav-item nav-link"><i class="fa fa-tags me-2"></i>優惠卷管理</a>
+                    <a href="allAdmin.html" class="nav-item nav-link active"><i class="fa fa-cogs me-2"></i>管理者管理</a>
                 </div>
             </nav>
         </div>
@@ -92,25 +92,32 @@ d<!DOCTYPE html>
             <!-- Navbar End -->
 <!-- =============== 內容開始 =============== -->
             <div class="container-fluid pt-4 px-4">
+                <h6 class="mb-4">Responsive Table</h6>
                 <div class="row g-4">
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
+                    <div class="table-responsive">
+                        <tbody id="admins">
+                        <!--                                        <tr id="admins">-->
+                        <!--                                            <th scope="row" type="text"  id="qdminId">1</th>-->
+                        <!--                                            <td type="text"  id="floatingInput">John</td>-->
+                        <!--                                            <td type="text" id="floatingAccount">Doe</td>-->
+                        <!--                                            <td type="text" id="floatingPassword">jhon@email.com</td>-->
+                        <!--                                            <td type="text" id="createdTime">USA</td>-->
+                        <!--                                            <td type="text" id="productNo">123</td>-->
+                        <!--                                            <td type="text" class="form-control" id=" ">Member</td>-->
+                        <!--                                        </tr>-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">姓名</th>
+                                    <th scope="col">信箱</th>
+                                    <th scope="col">密碼</th>
+                                    <th scope="col">建立時間</th>
+                                    <th scope="col">編號</th>
+                                    <!--                                            <th scope="col">Status</th>-->
+                                </tr>
+                            </thead>
+                        <tbody>
+                    </div>
                 </div>
             </div>
 <!-- =============== 內容結束 =============== -->
@@ -155,6 +162,7 @@ d<!DOCTYPE html>
 
     <!-- Template Javascript -->
     <script src="../../static/admin/js/main.js"></script>
+    <script src="../../static/admin/js/table.js"></script>
 
     <script src="../../static/admin/js/product.js"></script>
 </body>
