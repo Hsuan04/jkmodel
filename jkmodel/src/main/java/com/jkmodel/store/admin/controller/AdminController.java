@@ -51,17 +51,16 @@ public class AdminController {
     }
 
 
-    @GetMapping("/findAll")
-    public ResponseEntity<Iterable<Admin>> findAll( @RequestBody(required = false) Admin admin) {
-        Iterable<Admin> findalladmin = adminService.findAll(admin);
-        if(findalladmin != null){
-            return ResponseEntity.status(HttpStatus.OK).body(findalladmin);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+@GetMapping("/findAll")
+public ResponseEntity<Iterable<Admin>> findAll() {
+    Iterable<Admin> findalladmin = adminService.findAll();
+    if (findalladmin != null) {
+        return ResponseEntity.status(HttpStatus.OK).body(findalladmin);
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+}
     
-
 
     @PostMapping("/logIn")
     public ResponseEntity<Admin> logIn(@RequestBody LogIn user) {
