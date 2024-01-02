@@ -102,8 +102,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product findProduct(Integer productNo) {
-        //回傳圖片格式？需要創建一個ProductResponse，photo屬性為List<Photo>？還是可以直接使用MultipartFile回傳？
-        //
+
         Product product = productRepository.findById(productNo).orElse(null);
 
         //=========是否有需要回傳ProductRequest?==========
@@ -118,7 +117,6 @@ public class ProductServiceImpl implements ProductService{
 
         ProductRequest productRequest = new ProductRequest();
         if(product != null){
-
             productRequest.setName(product.getName());
             productRequest.setCategory(product.getCategory());
             productRequest.setPrice(product.getPrice());
@@ -130,11 +128,7 @@ public class ProductServiceImpl implements ProductService{
             productRequest.setPhotos(multipartFileList);
 
             List<Photo> list = new ArrayList<>();
-
-
-
         }
-
         return product;
     }
 

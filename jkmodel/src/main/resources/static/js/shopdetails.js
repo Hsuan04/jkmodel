@@ -18,14 +18,30 @@ $(function () {
                 var img = document.createElement('img');
                 img.src = imageUrl;
                 $("#photo" + (i + 1)).append(img);
-                // $("#photo" + (i + 1)).attr("src", "data:image/png;base64," + product.photos[i]);
             }
+            // 大圖
+            var imageUrl = 'data:image/jpeg;base64,' + product.photos[0].photoString;
+            var img = document.createElement('img');
+            img.src = imageUrl;
+            $("#bigPhoto1").append(img);
+
         },
         error: function () {
             console.error("取得商品資料失敗");
         }
     });
-});
+})
 
-//圖片顯示切換
+//點第一張圖時
+
+
+
+
+
+
+
+
+
+
+
 
