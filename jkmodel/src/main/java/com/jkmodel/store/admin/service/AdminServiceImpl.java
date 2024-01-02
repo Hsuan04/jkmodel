@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Iterable<Admin> findAll(Admin admin) {
+    public Iterable<Admin> findAll() {
         return adminRepository.findAll();
     }
 
