@@ -68,7 +68,8 @@ public class UserDaoImpl implements UserDao {
 
         map.put("name", userRegisterRequest.getName());
         map.put("email", userRegisterRequest.getEmail());
-        map.put("password", userRegisterRequest.getGender());
+        map.put("password", userRegisterRequest.getPassword());
+        map.put("gender", userRegisterRequest.getGender());
         map.put("birthday", userRegisterRequest.getBirthday());
         map.put("phone", userRegisterRequest.getPhone());
         map.put("address", userRegisterRequest.getAddress());

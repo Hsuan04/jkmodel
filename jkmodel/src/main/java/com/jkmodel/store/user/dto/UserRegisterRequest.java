@@ -1,5 +1,7 @@
 package com.jkmodel.store.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,7 +17,7 @@ public class UserRegisterRequest {
     private String password;
     @NotNull
     private Integer gender;
-    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthday;
     @NotBlank
     private String phone;
