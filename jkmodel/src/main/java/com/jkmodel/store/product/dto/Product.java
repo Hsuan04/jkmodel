@@ -1,15 +1,18 @@
 package com.jkmodel.store.product.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jkmodel.store.photo.dto.Photo;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,8 +61,13 @@ public class Product {
     @Column(name = "admId")
     private Integer admId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Photo> photos;
+
+    private byte[] firstPhotoByte;
+
+    private String firstPhotoString;
 
     public Integer getProductNo() {
         return productNo;
@@ -187,5 +195,21 @@ public class Product {
 
     public void setPhotos(List<Photo> photos) {
         this.photos = photos;
+    }
+
+    public byte[] getFirstPhotoByte() {
+        return firstPhotoByte;
+    }
+
+    public void setFirstPhotoByte(byte[] firstPhotoByte) {
+        this.firstPhotoByte = firstPhotoByte;
+    }
+
+    public String getFirstPhotoString() {
+        return firstPhotoString;
+    }
+
+    public void setFirstPhotoString(String firstPhotoString) {
+        this.firstPhotoString = firstPhotoString;
     }
 }

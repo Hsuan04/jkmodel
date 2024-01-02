@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9bfb15-ac61-4b9c-8e25-b7de9c121b9f" name="Changes" comment="update signIn">
-      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/user/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/user/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/resources/templetes/signUp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/photo/FileUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/photo/model/Photo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/photo/repository/PhotoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jkmodel/src/main/resources/templetes/saveProduct.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/rowMapper/ProductRowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/rowMapper/ProductRowMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/java/com/jkmodel/store/product/service/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jkmodel/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jkmodel/src/main/resources/templetes/signIn.html" beforeDir="false" afterPath="$PROJECT_DIR$/jkmodel/src/main/resources/templetes/signIn.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +55,9 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2ZWT1v5AGovJkck7D3ygSgAoehC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -67,7 +72,12 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hao&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lawrence/Desktop/jkmodel&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -85,6 +95,10 @@
       <workItem from="1702536628298" duration="30000" />
       <workItem from="1702536663457" duration="2000" />
       <workItem from="1702536671184" duration="91000" />
+      <workItem from="1703056461106" duration="24000" />
+      <workItem from="1703056505784" duration="89000" />
+      <workItem from="1703264659876" duration="459000" />
+      <workItem from="1703265143645" duration="52000" />
     </task>
     <task id="LOCAL-00001" summary="update .gitignore">
       <option name="closed" value="true" />

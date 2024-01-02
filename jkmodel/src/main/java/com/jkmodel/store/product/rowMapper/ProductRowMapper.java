@@ -5,6 +5,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 public class ProductRowMapper implements RowMapper<Product> {
 
@@ -27,6 +30,11 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setStatus(resultSet.getBoolean("status"));
         product.setAdmId(resultSet.getInt("admId"));
 
+        byte[] photoBytes = resultSet.getBytes("photo");
+        if (photoBytes != null) {
+            product.setFirstPhotoByte(photoBytes);
+            product.setFirstPhotoString(Base64.getEncoder().encodeToString(photoBytes));
+        }
         return product;
     }
 }
