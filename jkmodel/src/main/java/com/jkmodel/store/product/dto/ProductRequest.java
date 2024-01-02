@@ -6,6 +6,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Base64;
 import java.util.List;
 
 public class ProductRequest {

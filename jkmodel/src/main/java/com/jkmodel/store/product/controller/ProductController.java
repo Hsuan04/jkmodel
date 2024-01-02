@@ -60,16 +60,29 @@ public class ProductController {
 
     //更新商品
     @PutMapping("/products/{productNo}")
-    public ResponseEntity<Product> update(@PathVariable Integer productNo,
-                                          @RequestBody ProductRequest productRequest,
-                                          BindingResult bindingResult) {
-        Product updatedProduct = productService.updateProductRequest(productNo, productRequest);
-        System.out.println("執行product update方法");
-        if (updatedProduct != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<?> update(@PathVariable Integer productNo,
+                                    @ModelAttribute @Valid ProductRequest productRequest,
+                                    BindingResult bindingResult) {
+        //錯誤驗證
+        if (bindingResult.hasErrors()) {
+            System.out.println("有執行錯誤驗證");
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).body(errors);
         }
+
+        System.out.println("準備執行controller update方法");
+        productService.updateProductRequest(productNo, productRequest);
+        System.out.println("執行controller update方法");
+
+//        if (updatedProduct != null) {
+//            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+        return null;
     }
 
     //刪除商品

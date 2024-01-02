@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,7 +84,7 @@ public class ProductServiceImpl implements ProductService{
 
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
-            existingProduct.setProductNo(productNo);
+//            existingProduct.setProductNo(productNo);
             existingProduct.setName(productRequest.getName());
             existingProduct.setCategory(productRequest.getCategory());
             existingProduct.setPrice(productRequest.getPrice());
@@ -99,16 +100,20 @@ public class ProductServiceImpl implements ProductService{
             existingProduct.setLastModifiedTime(LocalDateTime.now());
             System.out.println("更新商品資訊成功");
 
-            List<Photo> listP = new ArrayList();
-            List<String> photoStringList = productRequest.getPhotosString();
-            if(photoStringList != null){
-                for(int i = 0 ; i < photoStringList.size() ; i++){
-                    Photo photo = new Photo();
-                    photo.setProduct(existingProduct);
-                    photo.setPhoto(photoStringList.get(i).getBytes());
-                    listP.add(photo);
+            try {
+                List<Photo> listP = new ArrayList();
+                List<MultipartFile> photoList = productRequest.getPhotos();
+                if(photoList != null){
+                    for(int i = 0 ; i < photoList.size() ; i++){
+                        Photo photo = new Photo();
+                        photo.setProduct(existingProduct);
+                        photo.setPhoto(photoList.get(i).getBytes());
+                        listP.add(photo);
+                    }
+                    existingProduct.setPhotos(listP);
                 }
-                existingProduct.setPhotos(listP);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             System.out.println("更新圖片成功");
             productRepository.save(existingProduct);

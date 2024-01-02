@@ -180,56 +180,125 @@ if (!isPageLoaded) {
 }
 
 //更新商品功能
-$("#updateProduct").on("click", function () {
-    event.preventDefault();
+// $("#updateProduct").on("click", function () {
+//     event.preventDefault();
+//
+//     if (productNoValue) {
+//         var productData = {
+//             name: $("#name").val(),
+//             category: $("#category").val(),
+//             price: $("#price").val(),
+//             cost: $("#cost").val(),
+//             stock: $("#stock").val(),
+//             onTime: $("#onTime").val(),
+//             offTime: $("#offTime").val(),
+//             status: $("#status").val(),
+//             description: $("#description").val(),
+//             photosString: [
+//                 $("#productPhotos")[0].val(),
+//                 $("#productPhotos")[1].val(),
+//                 $("#productPhotos")[2].val(),
+//                 $("#productPhotos")[3].val(),
+//             ]
+//         };
+//         console.log("圖片是" + $("#productPhotos").val());
+//
+//         $.ajax({
+//             url: 'http://localhost:8080/products/' + productNoValue,
+//             type: 'PUT',
+//             contentType: 'application/json',
+//             data: JSON.stringify(productData),
+//             success: function (data) {
+//                 console.log("成功，準備執行跳轉頁面");
+//                 window.location.href = 'http://localhost:63342/jkmodel/jkmodel/src/main/resources/templetes/admin/allProduct.html';
+//             },
+//             error: function (error) {
+//                 console.error('Error:', error);
+//             }
+//         });
+//     } else {
+//         console.log("productNoValue 尚未被設置。");
+//     }
+// });
+//
+// function getBase64Images() {
+//     var filesInput = $("#productPhotos")[0];
+//     var files = filesInput.files;
+//     var images = [];
+//
+//     for (var i = 0; i < files.length; i++) {
+//         var reader = new FileReader();
+//         reader.readAsDataURL(files[i]);
+//
+//         reader.onload = function () {
+//             if (reader.result) {
+//                 images.push(reader.result.split(',')[1]);  // 去掉 base64 字符串的開頭部分
+//             }
+//         };
+//     }
+//     console.log("images:" + images);
+//     return images;
+// }
 
-    if (productNoValue) {
-        var productData = {
-            name: $("#name").val(),
-            category: $("#category").val(),
-            price: $("#price").val(),
-            cost: $("#cost").val(),
-            stock: $("#stock").val(),
-            onTime: $("#onTime").val(),
-            offTime: $("#offTime").val(),
-            status: $("#status").val(),
-            description: $("#description").val(),
-            photos: getBase64Images()
-        };
+//更新商品
+function updateProduct() {
 
-        $.ajax({
-            url: 'http://localhost:8080/products/' + productNoValue,
-            type: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify(productData),
-            success: function (data) {
-                console.log("成功，準備執行跳轉頁面");
-                window.location.href = 'http://localhost:63342/jkmodel/jkmodel/src/main/resources/templetes/admin/allProduct.html';
-            },
-            error: function (error) {
-                console.error('Error:', error);
+    var formData = new FormData($('#productForm')[0]);
+
+    // 檢查圖片數量
+    var photos = $('#productPhotos')[0].files;
+    if (photos.length === 0 || photos.length > 4) {
+        alert("圖片至少上傳1張，最多上傳4張圖片");
+        return;
+    }
+    // 清空所有錯誤訊息
+    clearErrorMessages();
+
+    $.ajax({
+        url: 'http://localhost:8080/products/' + productNoValue,
+        type: 'PUT',
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function (response) {
+            console.log('Product added successfully:', response);
+
+            // 錯誤訊息
+            displayError('name', response.name);
+            displayError('price', response.price);
+            displayError('cost', response.cost);
+            displayError('stock', response.stock);
+            displayError('description', response.description);
+
+            if (response.message === "成功更新商品") {
+                alert("更新商品成功！");
+                // 可以根據需要進行其他操作，例如跳轉頁面
+                // window.location.href = 'https://www.google.com';
             }
-        });
-    } else {
-        console.log("productNoValue 尚未被設置。");
-    }
-});
-
-// 函數返回 base64 圖片數組
-function getBase64Images() {
-    var filesInput = $("#productPhotos")[0];
-    var files = filesInput.files;
-    var images = [];
-
-    for (var i = 0; i < files.length; i++) {
-        var reader = new FileReader();
-        reader.readAsDataURL(files[i]);
-
-        reader.onload = function () {
-            images.push({ photoString: reader.result });
-        };
-    }
-
-    return images;
+        },
+        error: function (error) {
+            console.error('Error adding product:', error);
+            console.log("失敗");
+            if (error.status === 400 && error.responseJSON) {
+                // 在各個屬性上顯示錯誤訊息
+                displayErrorMessages(error.responseJSON);
+            }
+        }
+    });
 }
+
+// 清空所有錯誤訊息
+function clearErrorMessages() {
+    $(".error-message").empty();
+}
+
+// 顯示錯誤訊息
+function displayError(property, value) {
+    if (value !== undefined && value !== null) {
+        $("#error" + property.charAt(0).toUpperCase() + property.slice(1)).append('<label for="' + property + '" class="form-label" style="color: red;">' + value + '</label>');
+    }
+}
+
+
 
