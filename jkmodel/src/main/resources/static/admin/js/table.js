@@ -1,7 +1,7 @@
-(function ($) {
+$(document).ready(function () {
     "use strict";
 
-    const adminId = window.location.href.spilt("=")[1];
+    const adminId = window.location.href.split("=")[1];
 
     $.ajax({
         url: `http://localhost:8080/read/${adminId}`,//資料請求網址${}為jquery取參數的寫法
@@ -10,14 +10,36 @@
         contentType: 'application/json',  // 向後端通知 Content-Type 為 JSON
         dataType: 'json',//資料格式為jason
         success: function (data) {
+            // 清空 id 為 demo 的元素內容
+            // $("#demo").empty();
 
-            $("#adminId").val(data.id); // 获取输入框的值
-            $("#floatingInput").val(data.name); // 获取输入框的值
-            $("#floatingAccount").val(data.account); // 获取输入框的值
-            $("#floatingPassword").val(data.password); // 获取输入框的值
-            $("#createdTime").val(data.createdTime); // 获取输入框的值
-            $("#productNo").val(data.productNo); // 获取输入框的值
+            // 遍歷 data 並將 email 附加到 id 為 demo 的元素內
+            // $.each(data, function (index, item) {
+            //     $("#adminId").append(item.email + "<br>");
+            // });
 
+            // $("#adminId").html(data.id); // 获取输入框的值
+            // $("#floatingInput").html(data.name); // 获取输入框的值
+            // $("#floatingAccount").html(data.account); // 获取输入框的值
+            // $("#floatingPassword").html(data.password); // 获取输入框的值
+            // $("#createdTime").html(data.createdTime); // 获取输入框的值
+            // $("#productNo").html(data.productNo); // 获取输入框的值
+
+            $.each(data,function(key,item){
+                if(item.total!==0) {
+                    $('tbody.admins').append(`
+                        <tr id="admins">
+                            <th scope="row" type="text"  id="qdminId">${item.id}</th>
+                            <td type="text"  id="floatingInput">${item.name}</td>
+                            <td type="text" id="floatingAccount">Doe</td>
+                            <td type="text" id="floatingPassword">jhon@email.com</td>
+                            <td type="text" id="createdTime">USA</td>
+                            <td type="text" id="productNo">123</td>
+                            <td type="text" class="form-control" id=" ">Member</td>
+                        </tr>`);
+
+            }
+            });
 
         },
 

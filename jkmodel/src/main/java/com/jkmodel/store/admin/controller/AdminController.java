@@ -4,6 +4,7 @@ package com.jkmodel.store.admin.controller;
 import com.jkmodel.store.admin.dto.Admin;
 import com.jkmodel.store.admin.dto.LogIn;
 import com.jkmodel.store.admin.service.AdminService;
+import com.jkmodel.store.product.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class AdminController {
 
     @PutMapping("/admin/{adminId}")
     public ResponseEntity<Admin> update(@PathVariable Integer adminId,
-                         @RequestBody Admin admin) {
+                                        @RequestBody Admin admin) {
         //先搜尋有無此筆資料
         Admin updateAdmin = adminService.findById(adminId).orElse(null);
         //如果不等於null則存入新資料
@@ -49,13 +50,26 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.OK).body(readadmin);
     }
 
+
+    @GetMapping("/findAll")
+    public ResponseEntity<Iterable<Admin>> findAll( @RequestBody(required = false) Admin admin) {
+        Iterable<Admin> findalladmin = adminService.findAll(admin);
+        if(findalladmin != null){
+            return ResponseEntity.status(HttpStatus.OK).body(findalladmin);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    
+
+
     @PostMapping("/logIn")
     public ResponseEntity<Admin> logIn(@RequestBody LogIn user) {
         String name = user.getName();
         String pass = user.getPassword();
 
-//      Admin logInAmin = adminService.findByNameAndPassword(name, pass).orElse(null);
-        Admin logInAmin = adminService.findById(1).orElse(null);
+      Admin logInAmin = adminService.findByNameAndPassword(name, pass).orElse(null);
+//        Admin logInAmin = adminService.findById(1).orElse(null);
 
         // 比對密碼
         if (logInAmin.getPassword().equals(pass)) {

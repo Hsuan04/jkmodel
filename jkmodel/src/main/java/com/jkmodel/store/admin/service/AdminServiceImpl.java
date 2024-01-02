@@ -32,6 +32,13 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+    public Iterable<Admin> findAll(Admin admin) {
+        return adminRepository.findAll();
+    }
+
+
+
+    @Override
     public void deleteById(Integer adminId) {
         adminRepository.deleteById(adminId);
 
