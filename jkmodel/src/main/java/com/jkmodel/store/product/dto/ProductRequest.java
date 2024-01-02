@@ -46,6 +46,8 @@ public class ProductRequest {
 
     private List<MultipartFile> photos;
 
+    private List<String> photosString;
+
     public String getName() {
         return name;
     }
@@ -148,5 +150,13 @@ public class ProductRequest {
 
     public void setPhotos(List<MultipartFile> photos) {
         this.photos = photos;
+    }
+
+    public List<String> getPhotosString() {
+        return photosString;
+    }
+
+    public void setPhotosString(List<String> photosString) {
+        this.photosString = photosString;
     }
 }

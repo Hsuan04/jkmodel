@@ -193,7 +193,7 @@
                 <div class="row g-4">
                     <div class="col-sm-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">新增商品</h6>
+                            <h6 class="mb-4">修改商品</h6>
                             <form id="productForm" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="name" class="form-label" style="display: flex; align-items: center;">商品名稱：
@@ -263,17 +263,12 @@
 
                                     </label>
                                 </div>
-<!--                                    <label for="description">商品敘述:</label>-->
-<!--                                    <div id="errorDescription" style="display: flex; align-items: center; margin-left: 5px;"></div>-->
-<!--                                    <textarea class="form-control" placeholder="Leave a comment here"-->
-<!--                                              id="description" style="height: 150px;" name="description"></textarea>-->
-                                    <br>
-
+                                <br>
                                 <div class="mb-3">
                                     <label for="productPhotos" class="form-label">商品圖片:</label>
                                     <input class="form-control" type="file" id="productPhotos" name="photos" accept="image/*" multiple required>
                                 </div>
-                                <button onclick="addProduct()" class="btn btn-primary">新增</button>
+                                <button class="btn btn-primary" id="updateProduct">更新商品</button>
                             </form>
                         </div>
                     </div>
@@ -593,7 +588,7 @@
     <!-- Template Javascript -->
     <script src="../../static/admin/js/main.js"></script>
 
-    <script src="../../static/admin/js/addproduct.js"></script>
+    <script src="../../static/admin/js/updateproduct.js"></script>
 </body>
 
 </html>

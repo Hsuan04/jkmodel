@@ -21,4 +21,6 @@ public interface ProductService {
     List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product saveProductRequest(ProductRequest ProductRequest);
+
+    Product updateProductRequest(Integer productNo,ProductRequest ProductRequest);
 }

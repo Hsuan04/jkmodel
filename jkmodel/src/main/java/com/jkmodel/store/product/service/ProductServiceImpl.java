@@ -73,6 +73,49 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.save(product);
         }
 
+    @Override
+    public Product updateProductRequest(Integer productNo, ProductRequest productRequest) {
+
+        Optional<Product> optionalProduct = productRepository.findById(productNo);
+
+        photoRepository.deleteAllByProductNo(productNo);
+        System.out.println("刪除要更新的商品圖片");
+
+        if (optionalProduct.isPresent()) {
+            Product existingProduct = optionalProduct.get();
+            existingProduct.setProductNo(productNo);
+            existingProduct.setName(productRequest.getName());
+            existingProduct.setCategory(productRequest.getCategory());
+            existingProduct.setPrice(productRequest.getPrice());
+            existingProduct.setCost(productRequest.getCost());
+            existingProduct.setStock(productRequest.getStock());
+            existingProduct.setDescription(productRequest.getDescription());
+            existingProduct.setStatus(productRequest.getStatus());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime onTime = LocalDateTime.parse(productRequest.getOnTime(),formatter);
+            LocalDateTime offTime = LocalDateTime.parse(productRequest.getOffTime(),formatter);
+            existingProduct.setOnTime(onTime);
+            existingProduct.setOffTime(offTime);
+            existingProduct.setLastModifiedTime(LocalDateTime.now());
+            System.out.println("更新商品資訊成功");
+
+            List<Photo> listP = new ArrayList();
+            List<String> photoStringList = productRequest.getPhotosString();
+            if(photoStringList != null){
+                for(int i = 0 ; i < photoStringList.size() ; i++){
+                    Photo photo = new Photo();
+                    photo.setProduct(existingProduct);
+                    photo.setPhoto(photoStringList.get(i).getBytes());
+                    listP.add(photo);
+                }
+                existingProduct.setPhotos(listP);
+            }
+            System.out.println("更新圖片成功");
+            productRepository.save(existingProduct);
+            System.out.println("更新商品與圖片成功");
+        }
+        return null;
+    }
 
     @Override
     public Product update(Integer productNo, Product product) {

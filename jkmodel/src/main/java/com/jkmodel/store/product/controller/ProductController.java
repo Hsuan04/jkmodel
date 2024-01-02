@@ -61,8 +61,9 @@ public class ProductController {
     //更新商品
     @PutMapping("/products/{productNo}")
     public ResponseEntity<Product> update(@PathVariable Integer productNo,
-                                          @RequestBody Product product) {
-        Product updatedProduct = productService.update(productNo, product);
+                                          @RequestBody ProductRequest productRequest,
+                                          BindingResult bindingResult) {
+        Product updatedProduct = productService.updateProductRequest(productNo, productRequest);
         System.out.println("執行product update方法");
         if (updatedProduct != null) {
             return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);

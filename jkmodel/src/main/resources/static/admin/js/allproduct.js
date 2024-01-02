@@ -8,16 +8,20 @@ $(function () {
         success: function (data) {
             console.log(data);
 
+            // 將商品按照productNo由小到大排序
+            data.sort((a, b) => a.productNo - b.productNo);
+
             var productContainer = $("#productContainer");
             productContainer.empty();
 
             // 遍歷商品資料
             $.each(data, function (index, product) {
 
-                var statusText = product.status ? '上架中' : '下架中';
+                var statusText = product.status ? '上架' : '下架';
                 var statusStyle = product.status ? 'color:green;' : 'color:red;';
+                console.log(product.lastModifiedTime);
 
-                var formattedLastModifiedTime = product.lastModifiedTime.replace("T", " ");
+                var time = product.lastModifiedTime[0]+"/"+product.lastModifiedTime[1]+"/"+product.lastModifiedTime[2];
 
                 // 動態產生商品
                 var productRow = `
@@ -26,10 +30,11 @@ $(function () {
                                     <td>${product.name}</td>
                                     <td>${product.category}</td>
                                     <td>${product.price}</td>
-                                     <td style="${statusStyle}">${statusText}</td>
-                                    <td>${formattedLastModifiedTime}</td>
+                                    <td style="${statusStyle}">${statusText}</td>
+                                    <td>${time}</td>
                                     <td>
-                                        <a href="update.html">修改</a>
+                                        <a class="update" data-productNo="${product.productNo}" href="#">修改</a>
+                                        /
                                         <a class="deleteProduct" data-productNo="${product.productNo}" href="#">刪除</a>
                                     </td>
                                 </tr>`;
@@ -37,6 +42,17 @@ $(function () {
 
                 // 將商品卡片插入到容器中
                 $("#productContainer").append(productRow);
+
+                //修改商品功能
+                $(document).on('click', '.update', function (e) {
+                    e.preventDefault();
+
+                    var productRow = $(this).closest('tr');
+                    var productNo = $(this).data('productno');
+
+                    // 跳轉 updateProduct.html + productNo
+                    window.location.href = "updateProduct.html?productNo=" + productNo;
+                });
             });
         }
     });
@@ -65,6 +81,15 @@ $(document).on('click', '.deleteProduct', function (e) {
         });
     }
 });
+
+// 點擊修改按鈕
+function updateProduct() {
+    var productRow = $(this).closest('tr');
+    var productNo = productRow.find('.deleteProduct').data('productno');
+    console.log(productNo);
+    // 使用 window.location.href 跳轉到 updateProduct.html 並附加 productNo 參數
+    window.location.href = "updateProduct.html?productNo=" + productNo;
+}
 
 
 
