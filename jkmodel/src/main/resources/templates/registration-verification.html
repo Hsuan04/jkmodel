@@ -65,7 +65,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-3">
             <a
-              href="../templetes/index.html"
+              href="/index.html"
               class="header__logo"
               style="
                 text-decoration: none;
@@ -84,9 +84,9 @@
           <div class="col-lg-6 col-md-6">
             <nav class="header__menu mobile-menu">
               <ul>
-                <li><a href="../templetes/index.html">首頁</a></li>
+                <li><a href="/index.html">首頁</a></li>
                 <li class="active">
-                  <a href="../templetes/shop.html">商城</a>
+                  <a href="/shop.html">商城</a>
                 </li>
                 <li class="shop__sidebar__search">
                   <form action="#">
@@ -101,15 +101,15 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-              <a href="../templetes/collection.html"
+              <a href="/collection.html"
                 ><img src="../static/images/icon/heart.png" alt=""
               /></a>
-              <a href="../templetes/shopping-cart.html"
+              <a href="/shopping-cart.html"
                 ><img src="../static/images/icon/cart.png" alt="" />
                 <span id="shoppingCartCount"></span
               ></a>
               <span id="shoppingCartPrice">元</span>
-              <a href="../templetes/signIn.html"
+              <a href="/signIn.html"
                 ><i
                   class="fa-regular fa-user"
                   style="color: #000000; margin-left: 10px"
@@ -127,13 +127,12 @@
     <!-- ***************************************************** -->
 
     <div
-      class="page-header min-vh-75"
+      class="page-header"
       style="
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
       "
     >
       <div class="container">
@@ -149,75 +148,46 @@
               "
             >
               <div class="card-header pb-0 text-left bg-transparent">
-                <!-- <h2 class="font-weight-bolder text-info text-gradient" style="text-align: center">登入</h2> -->
-                <h3 class="font-weight-bolder text-info text-gradient">
-                  Welcome back
-                </h3>
-                <p class="mb-0">請輸入使用者帳號、密碼來登入</p>
-              </div>
-              <div class="card-body" id="signIn">
-                <!-- <form role="form"> -->
-                <label>帳號</label>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="account"
-                    placeholder="請輸入帳號"
-                    aria-label="account"
-                    aria-describedby="account-addon"
-                  />
-                </div>
-                <label>密碼</label>
-                <div class="mb-3">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder="請輸入密碼"
-                    aria-label="password"
-                    aria-describedby="password-addon"
-                  />
-                </div>
-                <div class="form-check form-switch">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="rememberMe"
-                    checked=""
-                  />
-                  <label class="form-check-label" for="rememberMe"
-                    >記住帳號密碼</label
-                  >
-                </div>
-                <div class="text-center">
-                  <button
-                    type="submit"
-                    class="btn bg-gradient-info w-100 mt-4 mb-0"
-                    id="commit"
-                  >
-                    登入
-                  </button>
-                </div>
-                <!-- </form> -->
-              </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <p class="mb-4 text-sm mx-auto">
-                  尚未註冊?
-                  <a
-                    href="./sign-up.html"
-                    class="text-info text-gradient font-weight-bold"
-                    >Sign up</a
-                  >
+                <h5>輸入驗證碼</h5>
+                <p class="text-lead text-black mb-0">
+                  驗證碼已發送至您的註冊信箱，請輸入驗證碼完成註冊
                 </p>
-                <p class="mb-4 text-sm mx-auto">
-                  忘記密碼?
-                  <a
-                    href="./retrieve-password.html"
-                    class="text-info text-gradient font-weight-bold"
-                    >重設密碼</a
-                  >
-                </p>
+              </div>
+
+              <div class="card-body mt-0">
+                <form role="form">
+                  <label>Verification-code</label>
+                  <div class="mb-2 mt-1">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="verificationCode"
+                      placeholder="請輸入驗證碼"
+                      aria-label="verification-code"
+                      aria-describedby="verification-code-addon"
+                    />
+                  </div>
+                  <div class="row">
+                    <div class="col-6 mb-0 mt-4">
+                      <a
+                        href="#"
+                        id="submit"
+                        class="btn btn-outline-dark"
+                        style="width: 100%"
+                        >送出驗證</a
+                      >
+                    </div>
+                    <div class="col-6 mb-0 mt-4">
+                      <a
+                        href="member.html"
+                        id="notSubmit"
+                        class="btn bg-gradient-dark"
+                        style="width: 100%"
+                        >稍後驗證</a
+                      >
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -243,69 +213,60 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      $("#signIn #commit").on("click", function (e) {
-        // 停止點擊預設事件
+      $("#submit").on("click", function (e) {
         e.preventDefault();
-
-        if ($("#account").val().trim() == "") {
-          alert("請輸入帳號！");
-          return;
-        } else if ($("#password").val() == "") {
-          alert("請輸入密碼！");
-          return;
-        }
-
-        /*  將 sign-in 資料用物件包裝  */
-        let signIn_item = {
-          account: $("#account").val(),
-          password: $("#password").val(),
+        let verificationCode = {
+          verificationCode: $("#verificationCode").val(),
         };
-        console.log(signIn_item);
+        console.log(verificationCode);
 
         $.ajax({
-          url: "",
+          url: END_POINT_URL + COLLECTION_POINT,
           type: "POST",
-          data: signIn_item,
+          data: verificationCode,
           dataType: "json",
-          beforeSend: function () {
-            console.log("success前->beforeSend");
+          beforeSend: function (xhr) {
+            console.log("beforeSend");
           },
           success: function (data) {
+            // console.log("success");
             console.log(data);
-            loginRedirect(data);
-            // console.log("成;
-          },
-          error: function (xhr) {
-            console.log("error");
-            console.log(xhr);
+            redirectPath(data);
           },
           complete: function (xhr) {
             console.log("complete");
-            console.log(xhr);
           },
         });
-        function loginRedirect(data) {
+        function redirectPath(data) {
+          // alert("function");
           switch (data.status) {
-            case "accFailed":
-              alert("帳號錯誤，請重新輸入帳號！");
-              $("#account").val("");
-              $("#password").val("");
+            case "verified":
+              alert("使用者已驗證，網頁將重新導向至首頁！");
+              location.href = "home-03.html";
               break;
-            case "pswFailed":
-              alert("密碼錯誤，請重新輸入密碼！");
-              $("#account").val("");
-              $("#password").val("");
+            case "failed":
+              alert("驗證碼輸入錯誤，請重新輸入！");
               break;
             case "success":
-              alert("登入成功！");
-              location.href = data.location;
+              alert("驗證成功，網頁將重新導向至首頁！");
+              location.href = "home-03.html";
               break;
             default:
-              alert("看不懂錯在哪，再重登一次吧:-D");
-              location.href = "sign-in.html";
-              break;
+              alert("怎會跑到這，先回會員中心吧:D");
+              location.href = "member.html";
           }
+          // if (data.status == "failed") {
+          //   alert("驗證錯誤，請重新輸入！");
+          //   $("#verificationCode").val("");
+          // } else if (data.status == "succeed") {
+          //   alert("資料驗證完成，網頁將重新導向至首頁！");
+          //   location.href = "home-03.html";
+          // }
         }
+      });
+
+      $("#notSubmit").on("click", function () {
+        alert("稍後可於會員中心再次驗證，將轉導至會員中心。");
       });
     </script>
   </body>

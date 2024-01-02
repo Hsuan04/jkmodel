@@ -8,7 +8,7 @@ import com.jkmodel.store.user.entity.User;
 import com.jkmodel.store.user.repository.UserRepository;
 import com.jkmodel.store.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public User login(LoginRequest loginRequest) {
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         User exist = userRepository.findByEmail(user.getEmail());
 
         if (exist != null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"duplicateEmail");
         }
         //使用MD5 生成密碼的雜湊值
         String hashPassword = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
@@ -72,6 +72,14 @@ public class UserServiceImpl implements UserService {
         sendRegistrationConfirmationEmail(savedUser.getEmail());
 
         return savedUser;
+    }
+
+    @Override
+    public boolean verifyVerificationCode(String userEmail, String enteredCode) {
+        String storedCode = stringRedisTemplate.opsForValue().get("verificationCode:" + userEmail);
+
+        // 比對使用者輸入的驗證碼和 Redis 中儲存的驗證碼是否相符
+        return storedCode != null && storedCode.equals(enteredCode);
     }
 
     @Override
@@ -126,8 +134,10 @@ public class UserServiceImpl implements UserService {
         // 調用注入的 MailManager 的 sentMail 方法
         mailManager.sentMail(from, sendTo, cc, bcc, personal, subject, context);
 
+        System.out.println(userEmail);
+
         // 將驗證碼儲存在 Redis 中，有效期為一定時間（例如 10 分鐘）
-        redisTemplate.opsForValue().set("verificationCode:" + userEmail, verificationCode, 10, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(userEmail, verificationCode, 10, TimeUnit.MINUTES);
 
 
     }

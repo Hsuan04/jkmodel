@@ -15,22 +15,39 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
     private Integer userId;
+
     @NotBlank
+    @Column(name = "name")
     private String name;
+
     @NotBlank
     @Email
+    @Column(name = "email")
     private String email;
+
     @NotBlank
+    @Column(name = "password")
     private String password;
+
     @NotNull
+    @Column(name = "gender")
     private Integer gender;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(name = "birthday")
     private Date birthday;
+
     @NotBlank
+    @Column(name = "phone")
     private String phone;
+
     @NotBlank
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "createdTime")
     private Date createdTime;
 
     public Integer getUserId() {

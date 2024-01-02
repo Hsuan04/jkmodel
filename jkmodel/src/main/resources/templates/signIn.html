@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Male_Fashion Template" />
+    <meta name="keywords" content="Male_Fashion, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Css Styles -->
+    <link
+      rel="stylesheet"
+      href="../static/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/font-awesome.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/elegant-icons.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/magnific-popup.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/nice-select.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/owl.carousel.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../static/css/slicknav.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" />
+  </head>
+
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Header Begin -->
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-3">
+            <a
+              href="/index.html"
+              class="header__logo"
+              style="
+                text-decoration: none;
+                font-family: 'Arial', sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                text-shadow: 1px 1px 1px #666;
+                cursor: pointer;
+                display: inline-block;
+              "
+            >
+              JKmodel
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <nav class="header__menu mobile-menu">
+              <ul>
+                <li><a href="/index.html">首頁</a></li>
+                <li class="active">
+                  <a href="/shop.html">商城</a>
+                </li>
+                <li class="shop__sidebar__search">
+                  <form action="#">
+                    <input type="text" placeholder="搜尋商品..." />
+                    <button type="submit">
+                      <span class="icon_search"></span>
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <div class="header__nav__option">
+              <a href="/collection.html"
+                ><img src="../static/images/icon/heart.png" alt=""
+              /></a>
+              <a href="/shopping-cart.html"
+                ><img src="../static/images/icon/cart.png" alt="" />
+                <span id="shoppingCartCount"></span
+              ></a>
+              <span id="shoppingCartPrice">元</span>
+              <a href="/signIn.html"
+                ><i
+                  class="fa-regular fa-user"
+                  style="color: #000000; margin-left: 10px"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="canvas__open"><i class="fa fa-bars"></i></div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- ===================================================== -->
+    <!-- ***************************************************** -->
+
+    <div
+      class="page-header min-vh-75"
+      style="
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      "
+    >
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto mb-5"
+          >
+            <div
+              class="card card-plain mt-8 mb-5"
+              style="
+                box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+                padding-top: 10px;
+              "
+            >
+              <div class="card-header pb-0 text-left bg-transparent">
+                <!-- <h2 class="font-weight-bolder text-info text-gradient" style="text-align: center">登入</h2> -->
+                <h3 class="font-weight-bolder text-info text-gradient">
+                  Welcome back
+                </h3>
+                <p class="mb-0">請輸入使用者帳號、密碼來登入</p>
+              </div>
+              <div class="card-body" id="signIn">
+                <!-- <form role="form"> -->
+                <label>帳號</label>
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="account"
+                    placeholder="請輸入帳號"
+                    aria-label="account"
+                    aria-describedby="account-addon"
+                  />
+                </div>
+                <label>密碼</label>
+                <div class="mb-3">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="請輸入密碼"
+                    aria-label="password"
+                    aria-describedby="password-addon"
+                  />
+                </div>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="rememberMe"
+                    checked=""
+                  />
+                  <label class="form-check-label" for="rememberMe"
+                    >記住帳號密碼</label
+                  >
+                </div>
+                <div class="text-center">
+                  <button
+                    type="submit"
+                    class="btn bg-gradient-info w-100 mt-4 mb-0"
+                    id="commit"
+                  >
+                    登入
+                  </button>
+                </div>
+                <!-- </form> -->
+              </div>
+              <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                <p class="mb-4 text-sm mx-auto">
+                  尚未註冊?
+                  <a
+                    href="./sign-up.html"
+                    class="text-info text-gradient font-weight-bold"
+                    >Sign up</a
+                  >
+                </p>
+                <p class="mb-4 text-sm mx-auto">
+                  忘記密碼?
+                  <a
+                    href="./retrieve-password.html"
+                    class="text-info text-gradient font-weight-bold"
+                    >重設密碼</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+
+    <!-- Js Plugins -->
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.nice-select.min.js"></script>
+    <script src="../static/js/jquery.nicescroll.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/jquery.countdown.min.js"></script>
+    <script src="../static/js/jquery.slicknav.js"></script>
+    <script src="../static/js/mixitup.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c89374f433.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("#signIn #commit").on("click", function (e) {
+        // 停止點擊預設事件
+        e.preventDefault();
+
+        if ($("#account").val().trim() == "") {
+          alert("請輸入帳號！");
+          return;
+        } else if ($("#password").val() == "") {
+          alert("請輸入密碼！");
+          return;
+        }
+
+        /*  將 sign-in 資料用物件包裝  */
+        let signIn_item = {
+          account: $("#account").val(),
+          password: $("#password").val(),
+        };
+        console.log(signIn_item);
+
+        $.ajax({
+          url: "",
+          type: "POST",
+          data: signIn_item,
+          dataType: "json",
+          beforeSend: function () {
+            console.log("success前->beforeSend");
+          },
+          success: function (data) {
+            console.log(data);
+            loginRedirect(data);
+            // console.log("成;
+          },
+          error: function (xhr) {
+            console.log("error");
+            console.log(xhr);
+          },
+          complete: function (xhr) {
+            console.log("complete");
+            console.log(xhr);
+          },
+        });
+        function loginRedirect(data) {
+          switch (data.status) {
+            case "accFailed":
+              alert("帳號錯誤，請重新輸入帳號！");
+              $("#account").val("");
+              $("#password").val("");
+              break;
+            case "pswFailed":
+              alert("密碼錯誤，請重新輸入密碼！");
+              $("#account").val("");
+              $("#password").val("");
+              break;
+            case "success":
+              alert("登入成功！");
+              location.href = data.location;
+              break;
+            default:
+              alert("看不懂錯在哪，再重登一次吧:-D");
+              location.href = "sign-in.html";
+              break;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

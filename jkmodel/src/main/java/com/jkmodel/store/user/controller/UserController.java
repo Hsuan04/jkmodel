@@ -27,6 +27,10 @@ public class UserController {
 
     }
 
+//    public ResponseEntity verify(@RequestBody String enteredCode){
+//
+//    }
+
     @PostMapping("/users/login")
     public ResponseEntity<User> login(@RequestBody @Valid LoginRequest loginRequest){
 
@@ -50,6 +54,8 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updateUser);
     }
+
+
 
 
 }
