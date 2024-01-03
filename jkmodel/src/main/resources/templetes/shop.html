@@ -87,9 +87,9 @@
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="搜尋商品...">
-                                <button type="submit"><span class="icon_search"></span></button>
+                            <form id="searchForm">
+                                <input type="text" placeholder="搜尋商品..." id="keyword">
+                                <button type="submit" id="search"><span class="icon_search"></span></button>
                             </form>
                         </div>
                         <div class="shop__sidebar__accordion">
@@ -104,12 +104,11 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
-                                                    <li><a href="#">所有商品</a></li>
-                                                    <li><a href="#">上衣</a></li>
-                                                    <li><a href="#">褲子</a></li>
-                                                    <li><a href="#">包包</a></li>
-                                                    <li><a href="#">鞋子</a></li>
-                                                    <li><a href="#">配件</a></li>
+                                                    <li><a href="#" id="allProduct">所有商品</a></li>
+                                                    <li><a href="#" id="tops">上衣</a></li>
+                                                    <li><a href="#" id="pants">褲子</a></li>
+                                                    <li><a href="#" id="accessories">配件</a></li>
+                                                    <li><a href="#" id="others">其他</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -253,7 +252,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
                                     <span>總共</span>
-                                    <span id="productsCount">100</span>
+                                    <span id="productsCount"></span>
                                     <span>商品</span>
                                 </div>
                             </div>

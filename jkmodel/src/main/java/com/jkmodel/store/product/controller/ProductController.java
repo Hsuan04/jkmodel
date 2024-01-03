@@ -5,6 +5,9 @@ import com.jkmodel.store.product.dto.Product;
 import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -90,7 +93,6 @@ public class ProductController {
     public ResponseEntity<Product> findById(@PathVariable Integer productNo){
         System.out.println("執行product findById方法");
         Product product = productService.findById(productNo);
-        System.out.println("商品名稱為" + product.getName());
         if(product != null){
             return ResponseEntity.status(HttpStatus.OK).body(product);
         } else {
@@ -99,33 +101,62 @@ public class ProductController {
     }
 
     //取得所有商品(搜尋、種類、排序)
+//    @GetMapping("/products")
+//    public ResponseEntity<Iterable<?>> findAll(
+//            @RequestParam(required = false) String search,                      //關鍵字
+//            @RequestParam(required = false) String category,                    //種類條件
+//            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,    //預設排序條件
+//            @RequestParam(defaultValue = "desc") String sort,                   //預設排序方式
+//            @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,//呈現資料筆數
+//            @RequestParam(defaultValue = "0") @Min(0) Integer offset,           //跳過幾筆資料
+//            @RequestParam(required = false) @Min(0) Integer minPrice,            // 最低價格
+//            @RequestParam(required = false) @Min(0) Integer maxPrice){           // 最高價格
+//
+//        System.out.println("執行product findAll方法");
+//        System.out.println("關鍵字是："+ search);
+//
+//        ProductQueryParams productQueryParams = new ProductQueryParams();
+//        productQueryParams.setSearch(search);
+//        productQueryParams.setCategory(category);
+//        productQueryParams.setOrderBy(orderBy);
+//        productQueryParams.setSort(sort);
+//        productQueryParams.setLimit(limit);
+//        productQueryParams.setOffset(offset);
+//        productQueryParams.setMinPrice(minPrice);
+//        productQueryParams.setMaxPrice(maxPrice);
+//
+//        Iterable<Product> products = productService.getProducts(productQueryParams);
+//        System.out.println("controller返回資料");
+//        if(products != null){
+//            return ResponseEntity.status(HttpStatus.OK).body(products);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
+
     @GetMapping("/products")
-    public ResponseEntity<Iterable<?>> findAll(
-            @RequestParam(required = false) String search,                      //關鍵字
-            @RequestParam(required = false) String category,                    //種類條件
-            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,    //預設排序條件
-            @RequestParam(defaultValue = "desc") String sort,                   //預設排序方式
-            @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,//呈現資料筆數
-            @RequestParam(defaultValue = "0") @Min(0) Integer offset,           //跳過幾筆資料
-            @RequestParam(required = false) @Min(0) Integer minPrice,            // 最低價格
-            @RequestParam(required = false) @Min(0) Integer maxPrice){           // 最高價格
+    public ResponseEntity<Iterable<Product>> findAll(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String category,
+            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,
+            @RequestParam(defaultValue = "desc") String sort,
+            @RequestParam(defaultValue = "12") Integer limit,
+            @RequestParam(defaultValue = "0") Integer offset,
+            @RequestParam(required = false) Integer minPrice,
+            @RequestParam(required = false) Integer maxPrice) {
 
-        System.out.println("執行product findAll方法");
+        System.out.println("執行 product findAll 方法");
+        System.out.println("關鍵字是：" + search);
 
-        ProductQueryParams productQueryParams = new ProductQueryParams();
-        productQueryParams.setSearch(search);
-        productQueryParams.setCategory(category);
-        productQueryParams.setOrderBy(orderBy);
-        productQueryParams.setSort(sort);
-        productQueryParams.setLimit(limit);
-        productQueryParams.setOffset(offset);
-        productQueryParams.setMinPrice(minPrice);
-        productQueryParams.setMaxPrice(maxPrice);
+        // pageRequest 分頁與排序
+        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.Direction.fromString(sort), orderBy);
 
-        Iterable<Product> products = productService.getProducts(productQueryParams);
+        // service 執行條件查詢
+        Page<Product> productPage = productService.getProducts(search, category, minPrice, maxPrice, pageRequest);
 
-        if(products != null){
-            return ResponseEntity.status(HttpStatus.OK).body(products);
+        System.out.println("controller 返回資料");
+        if (productPage.hasContent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(productPage.getContent());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

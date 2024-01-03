@@ -19,6 +19,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        System.out.println("dao傳送資料");
         //SQL語法
         String sql = "SELECT p.productNo, p.name, p.category, p.price, p.cost, p.stock, p.sellQuantity, p.buyCount, p.views, p.onTime, p.offTime, p.lastModifiedTime, p.description, p.status, p.admId, ph.photo AS photo FROM product p LEFT JOIN ( SELECT productNo, MIN(photoNo) AS minPhotoNo FROM photo GROUP BY productNo ) minPh ON p.productNo = minPh.productNo LEFT JOIN photo ph ON minPh.productNo = ph.productNo AND minPh.minPhotoNo = ph.photoNo where 1=1";
         //where 1=1 sql不會受到影響，方便下面sql拼接
@@ -54,13 +55,19 @@ public class ProductDaoImpl implements ProductDao{
 
         //分頁：限制幾筆資料與跳過幾筆資料
 //        sql = sql + " LIMIT :limit OFFSET :offset";
-        sql = sql + " LIMIT " + productQueryParams.getLimit() + " OFFSET " + productQueryParams.getOffset();
+//        sql = sql + " LIMIT " + productQueryParams.getLimit() + " OFFSET " + productQueryParams.getOffset();
 
-        map.put("limit", productQueryParams.getLimit());
-        map.put("offset", productQueryParams.getOffset());
+//        map.put("limit", productQueryParams.getLimit());
+//        map.put("offset", productQueryParams.getOffset());
 
-        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+        // 使用 DISTINCT 避免重复结果
+        String distinctSql = "SELECT DISTINCT * FROM (" + sql + ") AS distinctProducts";
+        List<Product> productList = namedParameterJdbcTemplate.query(distinctSql, map, new ProductRowMapper());
 
+
+//        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+
+        System.out.println("dao返回資料"+ productList);
         return productList;
     }
 }

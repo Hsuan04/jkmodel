@@ -9,6 +9,8 @@ import com.jkmodel.store.product.dto.Product;
 import com.jkmodel.store.product.dto.ProductRequest;
 import com.jkmodel.store.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -173,7 +175,13 @@ public class ProductServiceImpl implements ProductService{
         return product;
     }
 
-    public List<Product> getProducts(ProductQueryParams productQueryParams){
-        return productDao.getProducts(productQueryParams);
+//    public List<Product> getProducts(ProductQueryParams productQueryParams){
+//        System.out.println("service傳送資料");
+////        System.out.println("service層(dao.getProducts加參數)：" + productDao.getProducts(productQueryParams));
+//        return productDao.getProducts(productQueryParams);
+//    }
+
+    public Page<Product> getProducts(String search, String category, Integer minPrice, Integer maxPrice, Pageable pageable) {
+        return productRepository.findBySearchAndCategoryAndPriceRange(search, category, minPrice, maxPrice, pageable);
     }
 }
