@@ -25,17 +25,18 @@ $(document).ready(function () {
             // $("#createdTime").html(data.createdTime); // 获取输入框的值
             // $("#productNo").html(data.productNo); // 获取输入框的值
 
+            console.log(data);
             $.each(data,function(key,item){
                 if(item.total!==0) {
                     $('#admins').append(`
                         <tr id="admins">
-                            <th scope="row" type="text" id="adminId">${item.adminId}</th>
+                            <th scope="row" type="text" id="admId">${item.admId}</th>
                             <td type="text" id="floatingInput">${item.name}</td>
                             <td type="text" id="floatingAccount">${item.account}</td>
                             <td type="text" id="floatingPassword">${item.password}</td>
                             <td type="text" id="createdTime">${item.createdTime}</td>
                             <td type="text" id="productNo">${item.productNo}</td>
-<!--                            <td type="text" class="form-control" id=" ">Member</td>-->
+                            <td type="button" class="btn btn-primary" id=" ">確定刪除</td>
                         </tr>`);
 
             }
