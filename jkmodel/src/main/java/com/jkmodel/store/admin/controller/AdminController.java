@@ -16,11 +16,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("/admin")
-    public ResponseEntity<Admin> insert(@RequestBody Admin admin){
-        adminService.save(admin);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
 
+    @PostMapping("/insert")
+    public ResponseEntity<Admin> insert(@RequestBody Admin admin) {
+        Admin createdAdmin = adminService.save(admin);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdAdmin);
     }
 
     @PutMapping("/admin/{adminId}")

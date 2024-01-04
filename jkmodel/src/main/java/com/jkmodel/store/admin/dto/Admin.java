@@ -15,9 +15,9 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "adminId")
-            // admin_id
-    Integer adminId;
+    @Column(name = "adm_id")
+            // adm_id
+    Integer admId;
 
     @Column(name = "name")
     String name;
@@ -29,19 +29,19 @@ public class Admin {
     String password;
 
 
-    @Column(name = "createdTime", insertable = false, updatable = false)
-    Timestamp createdTime;
+    @Column(name = "created_time", insertable = false, updatable = false)
+    LocalDateTime createdTime;
 
-    @Column(name = "productNo", insertable = false)
+    @Column(name = "product_no", insertable = false)
     Integer productNo;
 
 
-    public Integer getAdminId() {
-        return adminId;
+    public Integer getAdmId() {
+        return admId;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setAdmId(Integer adminId) {
+        this.admId = adminId;
     }
 
     public String getName() {
@@ -68,11 +68,11 @@ public class Admin {
         this.password = password;
     }
 
-    public Timestamp getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Timestamp createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
