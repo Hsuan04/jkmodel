@@ -181,7 +181,7 @@ public class ProductServiceImpl implements ProductService{
 //        return productDao.getProducts(productQueryParams);
 //    }
 
-    public Page<Product> getProducts(String search, String category, Integer minPrice, Integer maxPrice, Pageable pageable) {
+    public Page<Product> getProducts(String search, String category, Double minPrice, Double maxPrice, Pageable pageable) {
         return productRepository.findBySearchAndCategoryAndPriceRange(search, category, minPrice, maxPrice, pageable);
     }
 }

@@ -136,23 +136,33 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity<Iterable<Product>> findAll(
-            @RequestParam(required = false) String search,
-            @RequestParam(required = false) String category,
-            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,
-            @RequestParam(defaultValue = "desc") String sort,
-            @RequestParam(defaultValue = "12") Integer limit,
-            @RequestParam(defaultValue = "0") Integer offset,
-            @RequestParam(required = false) Integer minPrice,
-            @RequestParam(required = false) Integer maxPrice) {
+            @RequestParam(required = false) String search,              //搜尋關鍵字
+            @RequestParam(required = false) String category,            //商品分類
+            @RequestParam(defaultValue = "onTime") String orderBy,      //排序根據
+            @RequestParam(defaultValue = "desc") String sort,           //排序方式
+            @RequestParam(defaultValue = "12") Integer size,            //幾筆資料
+            @RequestParam(defaultValue = "0") Integer page,             //頁數
+            @RequestParam(required = false) Double minPrice,            //最低金額
+            @RequestParam(required = false) Double maxPrice) {          //最低金額
+
+        if ("null".equals(category)) {
+            category = null;
+        }
 
         System.out.println("執行 product findAll 方法");
         System.out.println("關鍵字是：" + search);
+        System.out.println("分類是：" + category);
+        System.out.println("排序方式是：" + orderBy);
+        System.out.println("升降冪是：" + sort);
+        System.out.println("顯示商品數目為：" + size);
+        System.out.println("頁數是：" + page);
+        System.out.println("最低金額是：" + minPrice);
+        System.out.println("最高金額是：" + maxPrice);
 
         // pageRequest 分頁與排序
-        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.Direction.fromString(sort), orderBy);
-
-        // service 執行條件查詢
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(sort), orderBy);
         Page<Product> productPage = productService.getProducts(search, category, minPrice, maxPrice, pageRequest);
+        System.out.println("pageRequest：" + pageRequest.toString());
 
         System.out.println("controller 返回資料");
         if (productPage.hasContent()) {

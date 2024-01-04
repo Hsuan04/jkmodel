@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "(:category IS NULL OR p.category = :category) AND " +
             "(:minPrice IS NULL OR p.price >= :minPrice) AND " +
             "(:maxPrice IS NULL OR p.price <= :maxPrice)")
-    Page<Product> findBySearchAndCategoryAndPriceRange(String search, String category, Integer minPrice, Integer maxPrice, Pageable pageable);
+    Page<Product> findBySearchAndCategoryAndPriceRange(String search, String category, Double minPrice, Double maxPrice, Pageable pageable);
 
 
 }

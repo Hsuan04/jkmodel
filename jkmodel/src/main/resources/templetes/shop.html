@@ -105,10 +105,10 @@
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
                                                     <li><a href="#" id="allProduct">所有商品</a></li>
-                                                    <li><a href="#" id="tops">上衣</a></li>
-                                                    <li><a href="#" id="pants">褲子</a></li>
-                                                    <li><a href="#" id="accessories">配件</a></li>
-                                                    <li><a href="#" id="others">其他</a></li>
+                                                    <li><a href="#" id="tops" data-category="上衣">上衣</a></li>
+                                                    <li><a href="#" id="pants" data-category="褲子">褲子</a></li>
+                                                    <li><a href="#" id="accessories" data-category="配件">配件</a></li>
+                                                    <li><a href="#" id="others" data-category="其他">其他</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -141,107 +141,16 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__price">
                                                 <ul>
-                                                    <li><a href="#">不限價格</a></li>
-                                                    <li><a href="#">499元 以下</a></li>
-                                                    <li><a href="#">500元 - 999元</a></li>
-                                                    <li><a href="#">1000元 - 1999元</a></li>
-                                                    <li><a href="#">2000元 以上</a></li>
+                                                    <li><a href="#" id="priceAll">不限價格</a></li>
+                                                    <li><a href="#" id="price1">999元 以下</a></li>
+                                                    <li><a href="#" id="price2">1000元 - 1999元</a></li>
+                                                    <li><a href="#" id="price3">2000元 - 2499元</a></li>
+                                                    <li><a href="#" id="price4">2500元 以上</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseFour">Size</a>
-                                    </div>
-                                    <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__size">
-                                                <label for="xs">xs
-                                                    <input type="radio" id="xs">
-                                                </label>
-                                                <label for="sm">s
-                                                    <input type="radio" id="sm">
-                                                </label>
-                                                <label for="md">m
-                                                    <input type="radio" id="md">
-                                                </label>
-                                                <label for="xl">xl
-                                                    <input type="radio" id="xl">
-                                                </label>
-                                                <label for="2xl">2xl
-                                                    <input type="radio" id="2xl">
-                                                </label>
-                                                <label for="xxl">xxl
-                                                    <input type="radio" id="xxl">
-                                                </label>
-                                                <label for="3xl">3xl
-                                                    <input type="radio" id="3xl">
-                                                </label>
-                                                <label for="4xl">4xl
-                                                    <input type="radio" id="4xl">
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
-                                    </div>
-                                    <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__color">
-                                                <label class="c-1" for="sp-1">
-                                                    <input type="radio" id="sp-1">
-                                                </label>
-                                                <label class="c-2" for="sp-2">
-                                                    <input type="radio" id="sp-2">
-                                                </label>
-                                                <label class="c-3" for="sp-3">
-                                                    <input type="radio" id="sp-3">
-                                                </label>
-                                                <label class="c-4" for="sp-4">
-                                                    <input type="radio" id="sp-4">
-                                                </label>
-                                                <label class="c-5" for="sp-5">
-                                                    <input type="radio" id="sp-5">
-                                                </label>
-                                                <label class="c-6" for="sp-6">
-                                                    <input type="radio" id="sp-6">
-                                                </label>
-                                                <label class="c-7" for="sp-7">
-                                                    <input type="radio" id="sp-7">
-                                                </label>
-                                                <label class="c-8" for="sp-8">
-                                                    <input type="radio" id="sp-8">
-                                                </label>
-                                                <label class="c-9" for="sp-9">
-                                                    <input type="radio" id="sp-9">
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
-                                    </div>
-                                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__tags">
-                                                <a href="#">Product</a>
-                                                <a href="#">Bags</a>
-                                                <a href="#">Shoes</a>
-                                                <a href="#">Fashio</a>
-                                                <a href="#">Clothing</a>
-                                                <a href="#">Hats</a>
-                                                <a href="#">Accessories</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -259,13 +168,20 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>排序方式: </p>
-                                    <select>
-                                        <option value="">時間由新至舊</option>
-                                        <option value="">時間由舊至新</option>
-                                        <option value="">觀看次數多至少</option>
-                                        <option value="">觀看次數少至多</option>
-                                        <option value="">銷售數量多至少</option>
+                                    <select id="sortingOptions">
+                                        <option value="timeNewToOld">時間由新至舊</option>
+                                        <option value="timeOldToNew">時間由舊至新</option>
+                                        <option value="viewsManyToLess">觀看次數多至少</option>
+                                        <option value="viewsLessToMany">觀看次數少至多</option>
                                     </select>
+<!--                                    <p>排序方式: </p>-->
+<!--                                    <select>-->
+<!--                                        <option value="" id="timeNewToOld">時間由新至舊</option>-->
+<!--                                        <option value="" id="timeOldToNew">時間由舊至新</option>-->
+<!--                                        <option value="" id="viewsManyToLess">觀看次數多至少</option>-->
+<!--                                        <option value="" id="viewsLessToMany">觀看次數少至多</option>-->
+<!--&lt;!&ndash;                                        <option value="">銷售數量多至少</option>&ndash;&gt;-->
+<!--                                    </select>-->
                                 </div>
                             </div>
                         </div>
@@ -273,56 +189,56 @@
                     
                     <div class="row" id="productContent">
                         <!-- 商品卡片（最新推出） -->
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                    <span class="label new" style="font-size: 14px; color: red;border: 1px solid red;">最新推出</span>
-                                    <ul class="product__hover">
-                                        <li><a href="#"><img src="../static/images/icon/heart.png" alt=""></a></li>
-                                        <!-- <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/compare.png" alt=""> <span>Compare</span></a> -->
-                                        </li>
-                                        <li><a href="shopDetails.html"><img src="../static/images/icon/search.png" alt=""></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6>
-                                        <span name="productName">商品名稱</span>
-                                        （
-                                        <span name="score">4.6</span>
-                                        分）
-                                    </h6>
-                                    <span name="price">499 元</span>
-                                    <a href="#" class="add-cart">+ 加入購物車</a>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                            <div class="product__item">-->
+<!--                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">-->
+<!--                                    <span class="label new" style="font-size: 14px; color: red;border: 1px solid red;">最新推出</span>-->
+<!--                                    <ul class="product__hover">-->
+<!--                                        <li><a href="#"><img src="../static/images/icon/heart.png" alt=""></a></li>-->
+<!--                                        &lt;!&ndash; <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/compare.png" alt=""> <span>Compare</span></a> &ndash;&gt;-->
+<!--                                        </li>-->
+<!--                                        <li><a href="shopDetails.html"><img src="../static/images/icon/search.png" alt=""></a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                                <div class="product__item__text">-->
+<!--                                    <h6>-->
+<!--                                        <span name="productName">商品名稱</span>-->
+<!--                                        （-->
+<!--                                        <span name="score">4.6</span>-->
+<!--                                        分）-->
+<!--                                    </h6>-->
+<!--                                    <span name="price">499 元</span>-->
+<!--                                    <a href="#" class="add-cart">+ 加入購物車</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <!-- 商品卡片（特價中） -->
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                                    <span class="label" name="sale">特價中</span>
-                                    <ul class="product__hover">
-                                        <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/heart.png" alt=""></a></li>
-                                        </li>
-                                        <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/search.png" alt=""></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6>
-                                        <span name="productName">商品名稱</span>
-                                        （
-                                        <span name="score">4.6</span>
-                                        分）
-                                    </h6>
-                                    <a href="#" class="add-cart">+ 加入購物車</a>
-                                        <span name="price" style="text-decoration-line: line-through;"> 元</span>
-                                        <span style="color: red; margin-left: 10px;">
-                                            <span name="salePrice"></span>
-                                            <span>元</span>
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                            <div class="product__item sale">-->
+<!--                                <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">-->
+<!--                                    <span class="label" name="sale">特價中</span>-->
+<!--                                    <ul class="product__hover">-->
+<!--                                        <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/heart.png" alt=""></a></li>-->
+<!--                                        </li>-->
+<!--                                        <li><a href="#"><img src="../../../../../../../Downloads/malefashion-master/img/icon/search.png" alt=""></a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                                <div class="product__item__text">-->
+<!--                                    <h6>-->
+<!--                                        <span name="productName">商品名稱</span>-->
+<!--                                        （-->
+<!--                                        <span name="score">4.6</span>-->
+<!--                                        分）-->
+<!--                                    </h6>-->
+<!--                                    <a href="#" class="add-cart">+ 加入購物車</a>-->
+<!--                                        <span name="price" style="text-decoration-line: line-through;"> 元</span>-->
+<!--                                        <span style="color: red; margin-left: 10px;">-->
+<!--                                            <span name="salePrice"></span>-->
+<!--                                            <span>元</span>-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="row">
                         <div class="col-lg-12">

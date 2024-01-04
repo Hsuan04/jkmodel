@@ -21,7 +21,7 @@ public interface ProductService {
     Product update(Integer productNo, Product product);
 
 //    List<Product> getProducts(ProductQueryParams productQueryParams);
-    Page<Product> getProducts(String search, String category, Integer minPrice, Integer maxPrice, Pageable pageable);
+    Page<Product> getProducts(String search, String category, Double minPrice, Double maxPrice, Pageable pageable);
 
     Product saveProductRequest(ProductRequest ProductRequest);
 
