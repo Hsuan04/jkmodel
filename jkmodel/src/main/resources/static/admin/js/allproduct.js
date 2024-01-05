@@ -22,6 +22,9 @@ $(function () {
                 console.log(product.lastModifiedTime);
 
                 var time = product.lastModifiedTime[0]+"/"+product.lastModifiedTime[1]+"/"+product.lastModifiedTime[2];
+                var isoDate = new Date(product.lastModifiedTime);
+                var formattedTime = isoDate.toLocaleString();
+
 
                 // 動態產生商品
                 var productRow = `
@@ -31,14 +34,14 @@ $(function () {
                                     <td>${product.category}</td>
                                     <td>${product.price}</td>
                                     <td style="${statusStyle}">${statusText}</td>
-                                    <td>${time}</td>
+                                    <td>${formattedTime}</td>
                                     <td>
                                         <a class="update" data-productNo="${product.productNo}" href="#">修改</a>
                                         /
                                         <a class="deleteProduct" data-productNo="${product.productNo}" href="#">刪除</a>
                                     </td>
                                 </tr>`;
-                console.log(productRow);
+                // console.log(productRow);
 
                 // 將商品卡片插入到容器中
                 $("#productContainer").append(productRow);

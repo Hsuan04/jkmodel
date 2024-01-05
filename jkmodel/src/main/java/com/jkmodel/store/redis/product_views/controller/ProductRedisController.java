@@ -1,11 +1,14 @@
 package com.jkmodel.store.redis.product_views.controller;
 
+import com.jkmodel.store.product.dto.Product;
+import com.jkmodel.store.product.service.ProductService;
+import com.jkmodel.store.redis.product_views.dto.UserViewsRequest;
 import com.jkmodel.store.redis.product_views.service.ProductRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProductRedisController {
@@ -13,47 +16,20 @@ public class ProductRedisController {
     @Autowired
     private ProductRedisService productRedisService;
 
-    @GetMapping("/addProductView/{productNo}")
-    public String addProductView(@PathVariable String productNo, HttpServletRequest request) {
+    @PostMapping("/testRedis")
+    public String testResdis(@RequestBody UserViewsRequest userViewsRequest) {
 
-        System.out.println("有呼叫到 addProductView");
+        System.out.println("UUID:" + userViewsRequest.getUuid());
+        System.out.println("productNo:" + userViewsRequest.getProductNo());
 
-        // 取得用戶IP
-        String userIp = request.getRemoteAddr();
-        System.out.println("userIp:" + userIp);
+        // json取得參數
+        String uuid = userViewsRequest.getUuid();
+        String productNo = userViewsRequest.getProductNo();
 
-        // 調用ProductService中的addProductToHistory方法，將商品添加到用戶的瀏覽歷史中
-        productRedisService.addProductToHistory(userIp, productNo);
+        productRedisService.saveUserViews(uuid, productNo);
 
-        return "新增成功";
+        return "success save userInfo";
+
+
     }
-
-
-    // ================== 設置哪個db  ==================
-//    private void setDatabaseIndex(Integer dbIndex){
-//        if(dbIndex == null || dbIndex > 15 || dbIndex < 0){
-//            dbIndex = database;
-//        }
-//        LettuceConnectionFactory redisConnectionFactory = (LettuceConnectionFactory) redisTemplate.getConnectionFactory();
-//        if (redisConnectionFactory == null){
-//            return;
-//        }
-//        redisConnectionFactory.setDatabase(dbIndex);
-//        redisTemplate.setConnectionFactory(redisConnectionFactory);
-//        redisConnectionFactory.afterPropertiesSet();
-//        redisConnectionFactory.resetConnection();;
-//    }
-//
-//    public <T> void save(final String key, final T value){
-//        redisTemplate.opsForValue().set(key, value);
-//    }
-//
-//    public <T> void save(Integer index, final String key, final T value){
-//        setDatabaseIndex(index);
-//        redisTemplate.opsForValue().set(key, value);
-//    }
-
-
-
 }
-

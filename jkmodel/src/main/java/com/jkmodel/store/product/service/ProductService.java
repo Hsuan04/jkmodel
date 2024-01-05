@@ -10,20 +10,18 @@ import java.util.List;
 
 public interface ProductService {
 
-    Product findById(Integer productNo);
-
-    Product findProduct(Integer productNo);
-
-//    Product save(Product product);
-
-    void deletById(Integer productNo);
-
-    Product update(Integer productNo, Product product);
-
-//    List<Product> getProducts(ProductQueryParams productQueryParams);
-    Page<Product> getProducts(String search, String category, Double minPrice, Double maxPrice, Pageable pageable);
-
     Product saveProductRequest(ProductRequest ProductRequest);
 
     Product updateProductRequest(Integer productNo,ProductRequest ProductRequest);
+
+    Product update(Integer productNo, Product product);
+
+    void deletById(Integer productNo);
+
+    Product findById(Integer productNo);
+
+    Page<Product> getProducts(String search, String category, Double minPrice, Double maxPrice, Pageable pageable);
+
+
+
 }

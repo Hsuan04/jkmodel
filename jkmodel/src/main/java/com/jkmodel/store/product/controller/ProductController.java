@@ -100,47 +100,14 @@ public class ProductController {
         }
     }
 
-    //取得所有商品(搜尋、種類、排序)
-//    @GetMapping("/products")
-//    public ResponseEntity<Iterable<?>> findAll(
-//            @RequestParam(required = false) String search,                      //關鍵字
-//            @RequestParam(required = false) String category,                    //種類條件
-//            @RequestParam(defaultValue = "lastModifiedTime") String orderBy,    //預設排序條件
-//            @RequestParam(defaultValue = "desc") String sort,                   //預設排序方式
-//            @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,//呈現資料筆數
-//            @RequestParam(defaultValue = "0") @Min(0) Integer offset,           //跳過幾筆資料
-//            @RequestParam(required = false) @Min(0) Integer minPrice,            // 最低價格
-//            @RequestParam(required = false) @Min(0) Integer maxPrice){           // 最高價格
-//
-//        System.out.println("執行product findAll方法");
-//        System.out.println("關鍵字是："+ search);
-//
-//        ProductQueryParams productQueryParams = new ProductQueryParams();
-//        productQueryParams.setSearch(search);
-//        productQueryParams.setCategory(category);
-//        productQueryParams.setOrderBy(orderBy);
-//        productQueryParams.setSort(sort);
-//        productQueryParams.setLimit(limit);
-//        productQueryParams.setOffset(offset);
-//        productQueryParams.setMinPrice(minPrice);
-//        productQueryParams.setMaxPrice(maxPrice);
-//
-//        Iterable<Product> products = productService.getProducts(productQueryParams);
-//        System.out.println("controller返回資料");
-//        if(products != null){
-//            return ResponseEntity.status(HttpStatus.OK).body(products);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//    }
-
+    //取得所有商品 + 篩選排序
     @GetMapping("/products")
     public ResponseEntity<Iterable<Product>> findAll(
             @RequestParam(required = false) String search,              //搜尋關鍵字
             @RequestParam(required = false) String category,            //商品分類
             @RequestParam(defaultValue = "onTime") String orderBy,      //排序根據
             @RequestParam(defaultValue = "desc") String sort,           //排序方式
-            @RequestParam(defaultValue = "12") Integer size,            //幾筆資料
+            @RequestParam(defaultValue = "100") Integer size,            //幾筆資料
             @RequestParam(defaultValue = "0") Integer page,             //頁數
             @RequestParam(required = false) Double minPrice,            //最低金額
             @RequestParam(required = false) Double maxPrice) {          //最低金額
@@ -148,16 +115,6 @@ public class ProductController {
         if ("null".equals(category)) {
             category = null;
         }
-
-        System.out.println("執行 product findAll 方法");
-        System.out.println("關鍵字是：" + search);
-        System.out.println("分類是：" + category);
-        System.out.println("排序方式是：" + orderBy);
-        System.out.println("升降冪是：" + sort);
-        System.out.println("顯示商品數目為：" + size);
-        System.out.println("頁數是：" + page);
-        System.out.println("最低金額是：" + minPrice);
-        System.out.println("最高金額是：" + maxPrice);
 
         // pageRequest 分頁與排序
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(sort), orderBy);

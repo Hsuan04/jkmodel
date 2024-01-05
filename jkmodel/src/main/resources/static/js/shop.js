@@ -163,9 +163,7 @@ function sendFilterRequest() {
                             <div class="product__item__text">
                                 <h6>
                                     <span name="productName">${product.name}</span>
-                                    （
-                                    <span name="score">${product.score}</span>
-                                    分）
+                                  
                                 </h6>
                                 ${isSaleProduct ?
                         `<span name="price" style="text-decoration-line: line-through;">${product.price} 元</span>
@@ -263,9 +261,6 @@ $('#search').on('click',function (event) {
                             <div class="product__item__text">
                                 <h6>
                                     <span name="productName">${product.name}</span>
-                                    （
-                                    <span name="score">${product.score}</span>
-                                    分）
                                 </h6>
                                 ${isSaleProduct ?
                                 `<span name="price" style="text-decoration-line: line-through;">${product.price} 元</span>
@@ -354,9 +349,6 @@ $(function () {
                             <div class="product__item__text">
                                 <h6>
                                     <span name="productName">${product.name}</span>
-                                    （
-                                    <span name="score">${product.score}</span>
-                                    分）
                                 </h6>
                                 ${isSaleProduct ?
                                     `<span name="price" style="text-decoration-line: line-through;">${product.price} 元</span>
