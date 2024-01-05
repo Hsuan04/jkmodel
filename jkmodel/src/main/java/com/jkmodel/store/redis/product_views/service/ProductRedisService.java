@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ProductRedisService {
@@ -23,7 +24,7 @@ public class ProductRedisService {
         Product product = productService.findById(Integer.valueOf(productNo));
         String category = product.getCategory();
 
-        // 判斷 uuid 下是否已經有 category
+        // 判斷 uuid 是否已經有 category
         Boolean hasCategory = redisTemplate.opsForHash().hasKey(uuid, category);
 
         if (hasCategory) {
@@ -36,57 +37,54 @@ public class ProductRedisService {
             System.out.println("Added new category: " + category);
         }
 
+        // 設定自動刪除時間
+        redisTemplate.expire(uuid, 30, TimeUnit.MINUTES);
+        System.out.println("Set expiration for " + uuid + " to 30 minutes");
+
+        // 取得最多瀏覽次數的種類
+        String maxViewCategory = getMaxViewCategory(uuid);
+
+        if(maxViewCategory == null){
+            System.out.println("有一樣的觀看次數");
+            return "same views in database";
+        }
+        System.out.println(maxViewCategory);
+
         return "success";
-//
-//        // 取得用戶的資料
-//        Map<Object, Object> userData = redisTemplate.opsForHash().entries(hashKey);
-//
-//        if (userData.containsKey(category)) {
-//            // 商品種類已存在，將觀看次數 +1
-//            int currentViews = (int) userData.get(category);
-//            userData.put(category, currentViews + 1);
-//        } else {
-//            // 商品種類不存在，新增一筆資料，觀看次數預設為 1
-//            userData.put(category, 1);
-//        }
-//
-//        // 更新 Hash 中的值
-//        redisTemplate.opsForHash().putAll(hashKey, userData);
-//
-//        return "Views updated successfully";
-
-
-
-        // 取得 Hash 中的 JSON 資料
-//        Object storedData = redisTemplate.opsForHash().get(hashKey, productNo);
-//
-//        if (storedData != null) {
-//
-//            // 更新 views
-//            int currentViews = ((UserViewsRequest) storedData).getViews();
-//            ((UserViewsRequest) storedData).setViews(currentViews + 1);
-//
-//            // 更新 Hash 中的值
-//            redisTemplate.opsForHash().put(hashKey, productNo, storedData);
-//
-//            return "Views updated successfully";
-//        } else {
-//            // 創建用戶訊息
-//            UserViewsRequest userInfo = new UserViewsRequest();
-//            userInfo.setUuid(hashKey);
-//            userInfo.setProductNo(productNo);
-//            userInfo.setCategory(category);
-//            userInfo.setViews(1);
-//
-//            // 修改 RedisTemplate 的 value 序列化器为 GenericJackson2JsonRedisSerializer
-//            redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-//
-//            // 存進redis
-//            redisTemplate.opsForHash().put(hashKey, productNo, userInfo);
-//
-//            return "New userInfo added successfully";
-//        }
-//
     }
+
+    // 判斷最多瀏覽次數的種類
+    public String getMaxViewCategory(String uuid) {
+        // 取得該 uuid 的所有 map
+        Map<Object, Object> hashEntries = redisTemplate.opsForHash().entries(uuid);
+
+        if (!hashEntries.isEmpty()) {
+            //初始化
+            int maxViews = -1;
+            String maxCategory = null;
+
+            // 遍歷所有商品種類及其對應的 views
+            for (Map.Entry<Object, Object> entry : hashEntries.entrySet()) {
+                String category = (String) entry.getKey();  // 取得商品種類
+                int views = (int) entry.getValue();  // 取得對應的 views
+
+                // 判斷最多瀏覽次數
+                if (views > maxViews) {
+                    maxViews = views;
+                    maxCategory = category;
+                } else if (views == maxViews) {
+                    return null;
+                }
+            }
+            // 返回最大 views 對應的 category
+            return maxCategory;
+        }
+
+        // 如果沒有商品種類，返回 null
+        return null;
+    }
+
+    // 計時刪除該 uuid 的資料
+
 
 }
