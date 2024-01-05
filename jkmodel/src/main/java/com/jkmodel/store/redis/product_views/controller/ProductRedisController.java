@@ -16,6 +16,7 @@ public class ProductRedisController {
     @Autowired
     private ProductRedisService productRedisService;
 
+    // 紀錄用戶習慣
     @PostMapping("/testRedis")
     public String testResdis(@RequestBody UserViewsRequest userViewsRequest) {
 
