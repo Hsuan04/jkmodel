@@ -1,4 +1,4 @@
-package com.jkmodel.store.redis.product_views.dto;
+package com.jkmodel.store.redis.dto;
 
 import org.springframework.stereotype.Component;
 
