@@ -36,7 +36,7 @@ public class ProductController {
     @PostMapping("/products")
     public ResponseEntity<?> save(@ModelAttribute @Valid ProductRequest productRequest,
                                        BindingResult bindingResult) {
-//        System.out.println("有呼叫controller save方法");
+        System.out.println("有呼叫controller save方法");
 
         //錯誤驗證
         if (bindingResult.hasErrors()) {
@@ -44,6 +44,7 @@ public class ProductController {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 errors.put(fieldError.getField(), fieldError.getDefaultMessage());
             }
+            System.out.println("回傳錯誤訊息");
             return ResponseEntity.status(HttpStatus.CREATED).body(errors);
         }
 

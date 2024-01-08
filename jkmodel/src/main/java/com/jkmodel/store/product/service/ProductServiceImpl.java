@@ -33,9 +33,6 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
 
     @Autowired
-    private ProductDao productDao;
-
-    @Autowired
     private PhotoRepository photoRepository;
 
     @Transactional

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Jkmodel 後台管理</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+<!--    <meta content="" name="description">-->
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../static/admin/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../static/admin/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../static/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../../static/admin/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+<!--        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">-->
+<!--            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">-->
+<!--                <span class="sr-only">Loading...</span>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="allProduct.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>後台管理系統</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+<!-- =============== 管理者名稱 =============== -->
+                        <h6 class="mb-0">Lawrence</h6>
+                        <span>管理者</span>
+                    </div>
+                </div>
+
+<!-- =============== 左側列表開始 =============== -->
+                <div class="navbar-nav w-100">
+                    <a href="allProduct.html" class="nav-item nav-link "><i class="fa fa-shopping-bag me-2"></i>商品管理</a>
+                    <a href="allUser.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>會員管理</a>
+                    <a href="allCoupon.html" class="nav-item nav-link active"><i class="fa fa-tags me-2"></i>優惠卷管理</a>
+                    <a href="allAdmin.html" class="nav-item nav-link"><i class="fa fa-cogs me-2"></i>管理者管理</a>
+                </div>
+            </nav>
+        </div>
+<!-- =============== 左側列表結束 =============== -->
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+<!--                <form class="d-none d-md-flex ms-4">-->
+<!--                    <input class="form-control border-0" type="search" placeholder="Search">-->
+<!--                </form>-->
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                    </div>
+                    <div class="nav-item dropdown">
+                    </div>
+                    <div class="nav-item dropdown">
+<!-- =============== 上面列表管理者 =============== -->
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Lawrence</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+<!--                            <a href="#" class="dropdown-item">My Profile</a>-->
+<!--                            <a href="#" class="dropdown-item">Settings</a>-->
+                            <a href="AdminLogin.html" class="dropdown-item">登出</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+<!-- =============== 設定優惠卷 =============== -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">新增優惠卷</h6>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label" style="display: flex; align-items: center;">優惠卷名稱
+                                        <div style="color: red"> (必填)：</div>
+                                        <div id="errorName" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input class="form-control" type="text" id="name" name="name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="discount" class="form-label" style="display: flex; align-items: center;">折扣金額
+                                        <div style="color: red"> (必填)：</div>
+                                        <div id="errorDiscount" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="number" id="discount" name="discount" required class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="limitPrice" class="form-label" style="display: flex; align-items: center;">低消金額 (非必填)：
+                                        <div id="errorLimitPrice" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="number" id="limitPrice" name="limitPrice" required class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="quantity" class="form-label" style="display: flex; align-items: center;">發送數量 (非必填)：
+                                        <div id="errorQuantity" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="number" id="quantity" name="quantity" required class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="releaseTime" style="display: flex; align-items: center;">發送日期 (預設為現在)：
+                                        <div id="errorReleaseTime" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="datetime-local" id="releaseTime" name="releaseTime" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="validDays" class="form-label" style="display: flex; align-items: center;">發送有效天數 (非必填)：
+                                        <div id="errorValidDays" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="number" id="validDays" name="validDays" required class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="startTime" id="errorOnTime" style="display: flex; align-items: center;">有效時間 (預設為現在)
+                                        <div id="errorStartTime" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="datetime-local" id="startTime" name="startTime" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="expireTime" style="display: flex; align-items: center;">失效時間
+                                        <div style="color: red"> (必填)：</div>
+                                        <div id="errorXpireTime" style="margin-left: 5px;" class="error-message"></div>
+                                    </label>
+                                    <input type="datetime-local" id="expireTime" name="expireTime" class="form-control" required>
+                                </div>
+
+
+
+                                <div style="color: red"> (必填)：</div>
+                                <div id="errorDescription" style="margin-left: 5px;" class="error-message"></div>
+                                <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here"
+                                          id="description" style="height: 150px;" name="description"></textarea>
+                                    <label for="description" style="display: inline-block">商品敘述
+
+
+                                    </label>
+                                </div>
+                                    <br>
+                                <button id="addCoupon" class="btn btn-primary">新增</button>
+
+                        </div>
+                    </div>
+<!-- =============== 新增商品開始 =============== -->
+                </div>
+            </div>
+            <!-- Form End -->
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+<!--                <div class="bg-light rounded-top p-4">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-12 col-sm-6 text-center text-sm-start">-->
+<!--                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. -->
+<!--                        </div>-->
+<!--                        <div class="col-12 col-sm-6 text-center text-sm-end">-->
+<!--                            &lt;!&ndash;/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/&ndash;&gt;-->
+<!--                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/admin/js/chart.min.js"></script>
+    <script src="../../static/admin/js/easing.min.js"></script>
+    <script src="../../static/admin/js/waypoints.min.js"></script>
+    <script src="../../static/admin/js/owl.carousel.min.js"></script>
+    <script src="../../static/admin/js/moment.min.js"></script>
+    <script src="../../static/admin/js/moment-timezone.min.js"></script>
+    <script src="../../static/admin/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../../static/admin/js/main.js"></script>
+
+    <script src="../../static/admin/js/addcoupon.js"></script>
+</body>
+
+</html>

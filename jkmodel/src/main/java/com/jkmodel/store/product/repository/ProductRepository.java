@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -20,5 +21,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "(:maxPrice IS NULL OR p.price <= :maxPrice)")
     Page<Product> findBySearchAndCategoryAndPriceRange(String search, String category, Double minPrice, Double maxPrice, Pageable pageable);
 
+    @Query("SELECT p FROM Product p WHERE p.category = :category ORDER BY p.views DESC")
+    List<Product> findTopProductsByCategory(String category, Pageable pageable);
+
+    @Query("SELECT p FROM Product p ORDER BY p.views DESC")
+    List<Product> findTopProducts(Pageable pageable);
 
 }
