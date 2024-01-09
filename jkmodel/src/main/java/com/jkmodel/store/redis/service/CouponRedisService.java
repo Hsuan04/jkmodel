@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -24,43 +26,36 @@ public class CouponRedisService {
     private CouponWebSocketHandler couponWebSocketHandler;
 
     public void saveToRedis(Coupon savedCoupon){
-
-        String couponKey = "couponNo:" + savedCoupon.getCouponNo();  // 自行定義 key 的格式
+        String couponKey = String.valueOf(savedCoupon.getCouponNo());
         Integer quantity = savedCoupon.getQuantity();
         LocalDateTime releaseTime = savedCoupon.getReleaseTime();
-        Integer ValidDays = savedCoupon.getValidDays();
+        Integer validDays = savedCoupon.getValidDays();
 
-        redisTemplateDB03.opsForHash().put(couponKey, couponKey, quantity);
+        // 將 couponNo,quantity 存進 Redis DB03
+        redisTemplateDB03.opsForValue().set(couponKey, quantity);
 
-        // 設定存活時間
-        Duration timeToLive = Duration.between(LocalDateTime.now(), releaseTime.plusDays(ValidDays));
-        redisTemplateDB03.expire(couponKey, timeToLive.toMillis(), TimeUnit.MILLISECONDS);
-
-        System.out.println("timeToLive:" + timeToLive);
+        // 設定存活時間 (測試使用2分鐘)
+        Duration timeToLive = Duration.between(LocalDateTime.now(), releaseTime.plusDays(validDays));
+        redisTemplateDB03.expire(couponKey, 6000000, TimeUnit.MILLISECONDS);
+//        redisTemplateDB03.expire(couponKey, timeToLive.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     // 每10分鐘觸發檢查優惠卷並調用 WebSocket
-//    @Scheduled(fixedRate = 600000)
-    @Scheduled(fixedRate = 30000) //10秒
+    @Scheduled(fixedRate = 10000) //10秒
     public void checkCouponExpiry() {
-        // 在這裡檢查 Redis 中的優惠券發送日期，並觸發相應的操作
-        // 這裡可以調用 WebSocket 發送通知的邏輯
-        Set<Object> couponNos = redisTemplateDB03.opsForHash().keys("couponNo");
-        System.out.println("每30秒發送一次couponNos:" + couponNos);
-        couponWebSocketHandler.sendCoupon("Hello Lawrence");
-        // 發送消息給所有連接的客戶端
-//        messagingTemplate.convertAndSend("/couponSocket", couponNos);
-    }
+        Map<String, Integer> coupons = new HashMap<>();
 
-    // 獲取優惠卷剩餘數量
-    public int getRemainingQuantity(String couponId) {
-        // 使用事務開始
-//        redisTemplateDB03.multi();
-        // 提交事務
-//        redisTemplateDB03.exec();
+        Set<String> keys = redisTemplateDB03.keys("*");
+        if(keys.size() == 0){
+            System.out.println("沒有優惠卷在redis裡面");
+        }
+        for (String key : keys) {
+            Integer quantity = (Integer) redisTemplateDB03.opsForValue().get(key);
+            coupons.put(key, quantity);
+            System.out.println(coupons);
+        }
 
-        Object value = redisTemplateDB03.opsForHash().get("couponNo", couponId);
-        return (value != null) ? (int) value : 0;
+        couponWebSocketHandler.sendCoupon(coupons);
     }
 
 

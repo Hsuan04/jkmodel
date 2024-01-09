@@ -5,10 +5,12 @@ import com.jkmodel.store.coupon.repository.CouponRepository;
 import com.jkmodel.store.redis.service.CouponRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
-@Component
+@Service
 @Transactional
 public class CouponServiceImpl implements CouponService{
 
@@ -23,5 +25,11 @@ public class CouponServiceImpl implements CouponService{
         Coupon savedCoupon = couponRepository.save(coupon);
         couponRedisService.saveToRedis(savedCoupon);
         return savedCoupon;
+    }
+
+    @Override
+    public Optional<Coupon> findById(Integer couponNo) {
+        Optional<Coupon> coupon = couponRepository.findById(couponNo);
+        return coupon;
     }
 }

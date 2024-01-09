@@ -76,7 +76,7 @@ public class RedisConfig {
         return createRedisTemplate(connectionFactory);
     }
 
-    // 儲存票卷數量
+    // 儲存剩餘票卷數量
     @Bean(name = "redisConnectionFactoryDB03")
     public RedisConnectionFactory redisConnectionFactoryDB03() {
         return createConnectionFactory(3);

@@ -53,7 +53,7 @@ public class ProductRedisService {
             System.out.println("Added new category: " + category);
         }
 
-        // 設定自動刪除時間
+        // 設定該筆資料存活時間
         redisTemplateDB01.expire(uuid, 30, TimeUnit.MINUTES);
         System.out.println("Set expiration for " + uuid + " to 30 minutes");
 

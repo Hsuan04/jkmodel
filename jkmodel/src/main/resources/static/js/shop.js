@@ -13,28 +13,28 @@ var filterParams = {
 $('#allProduct').click(function (event) {
     event.preventDefault();
     filterParams.category = 'null';
-    console.log("有點到所有商品，且種類為：" + filterParams.category);
+    // console.log("有點到所有商品，且種類為：" + filterParams.category);
     sendFilterRequest();
 });
 // 上衣
 $('#tops').click(function (event) {
     event.preventDefault();
     filterParams.category = '上衣';
-    console.log("點擊 tops:" + filterParams.category);
+    // console.log("點擊 tops:" + filterParams.category);
     sendFilterRequest();
 });
 // 褲子
 $('#pants').click(function (event) {
     event.preventDefault();
     filterParams.category = '褲子';
-    console.log("點擊 pants:" + filterParams.category);
+    // console.log("點擊 pants:" + filterParams.category);
     sendFilterRequest();
 });
 // 配件
 $('#accessories').click(function (event) {
     event.preventDefault();
     filterParams.category = '配件';
-    console.log("點擊 配件:" + filterParams.category);
+    // console.log("點擊 配件:" + filterParams.category);
     sendFilterRequest();
 });
 // 其他
@@ -58,7 +58,7 @@ $('#price1').click(function (event) {
     event.preventDefault();
     filterParams.minPrice = null;
     filterParams.maxPrice = 999;
-    console.log("點擊 999:" + filterParams.maxPrice);
+    // console.log("點擊 999:" + filterParams.maxPrice);
     sendFilterRequest();
 });
 //1000-1999以下
@@ -112,10 +112,10 @@ function sendFilterRequest() {
         dataType: 'json',
         data: filterParams,
         success: function (products) {
-            console.log("成功接收");
+            // console.log("成功接收");
             //判斷回傳的資料是否存在或空
             if (products && products.length > 0) {
-                console.log("filterParams"+ filterParams);
+                // console.log("filterParams"+ filterParams);
                 $("#productContent").empty();
 
                 // 變數用來記錄商品數量
@@ -125,9 +125,9 @@ function sendFilterRequest() {
 
                     // 計算商品時間
                     var onTime = new Date(product.onTime);
-                    console.log(product.onTime);
+                    // console.log(product.onTime);
                     var currentDate = new Date();
-                    console.log(currentDate);
+                    // console.log(currentDate);
                     var daysDifference = Math.abs((onTime - currentDate) / (1000 * 60 * 60 * 24));
 
                     // 判斷是否為最新商品或特價商品
@@ -140,7 +140,7 @@ function sendFilterRequest() {
                     if (product.photos && product.photos.length > 0 && product.photos[0].photoString !== null) {
                         var imageUrl = 'data:image/jpeg;base64,' + product.photos[0].photoString;
                         photosContainer += `<img src="${imageUrl}" alt="Product Photo">`;
-                        console.log(product.photos[0].photoString);
+                        // console.log(product.photos[0].photoString);
                     } else {
                         photosContainer += `<img src="" alt="Default Photo">`;
                     }
@@ -185,13 +185,13 @@ function sendFilterRequest() {
                 $("#productsCount").text(totalProducts);
 
             } else {
-                console.log("No products found.");
+                // console.log("No products found.");
                 $("#productContent").empty();
                 $("#productsCount").text(0);
             }
         },
         error: function (error) {
-            console.error('Error:', error);
+            // console.error('Error:', error);
             $("#productContent").empty();
             $("#productsCount").text(0);
         }
@@ -219,13 +219,13 @@ $('#search').on('click',function (event) {
             var totalProducts = 0;
 
             products.forEach(function (product) {
-                console.log("product：" + product);
+                // console.log("product：" + product);
 
                 // 計算商品時間
                 var onTime = new Date(product.onTime);
-                console.log(product.onTime);
+                // console.log(product.onTime);
                 var currentDate = new Date();
-                console.log(currentDate);
+                // console.log(currentDate);
                 var daysDifference = Math.abs((onTime - currentDate) / (1000 * 60 * 60 * 24));
 
 //              // 判斷是否為最新商品或特價商品
@@ -234,11 +234,11 @@ $('#search').on('click',function (event) {
 
                 // 圖片處理
                 var photosContainer = '';
-                // 检查商品是否有照片，且第一个照片的photoString不为null
+
                 if (product.photos && product.photos.length > 0 && product.photos[0].photoString !== null) {
                     var imageUrl = 'data:image/jpeg;base64,' + product.photos[0].photoString;
                     photosContainer += `<img src="${imageUrl}" alt="Product Photo">`;
-                    console.log(product.photos[0].photoString);
+                    // console.log(product.photos[0].photoString);
                 } else {
                     photosContainer += `<img src="" alt="Default Photo">`;
                 }
@@ -283,7 +283,7 @@ $('#search').on('click',function (event) {
             $("#productsCount").text(totalProducts);
         },
         error: function (error) {
-            console.error('Error:', error);
+            // console.error('Error:', error);
             $("#productContent").empty();
             $("#productsCount").text(0);
         }
@@ -298,7 +298,7 @@ $(function () {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
+            // console.log(data);
 
             var row = $("#row");
             row.empty();
@@ -311,9 +311,9 @@ $(function () {
 
                 // 計算商品時間
                 var onTime = new Date(product.onTime);
-                console.log(product.onTime);
+                // console.log(product.onTime);
                 var currentDate = new Date();
-                console.log(currentDate);
+                // console.log(currentDate);
                 var daysDifference = Math.abs((onTime - currentDate) / (1000 * 60 * 60 * 24));
 
                 // 判斷是否為最新商品或特價商品
@@ -326,7 +326,7 @@ $(function () {
                 if (product.photos && product.photos.length > 0 && product.photos[0].photoString !== null) {
                     var imageUrl = 'data:image/jpeg;base64,' + product.photos[0].photoString;
                     photosContainer += `<img src="${imageUrl}" alt="Product Photo">`;
-                    console.log(product.photos[0].photoString);
+                    // console.log(product.photos[0].photoString);
                 } else {
                     photosContainer += `<img src="" alt="Default Photo">`;
                 }
@@ -374,6 +374,101 @@ $(function () {
     });
 });
 
+// ================================== 優惠卷發送功能 ==================================
+function addMessageToList(couponInfoList) {
+    console.log("Received CouponInfoList: ", couponInfoList);
+
+    $('#couponContainer').empty();
+
+    // 判斷 List 增加關閉優惠卷消息的通道
+    // if (couponInfoList != null) {
+    //     var closeConnection = `<button type="button" class="btn btn-secondary btn-sm" id="closeWebsocketConnection">關閉優惠卷消息</button>`;
+    //     $('#couponContainer').append(closeConnection);
+    // }
+
+    // 遍歷 couponInfoList 並生成 HTML 元素
+    couponInfoList.forEach(function(couponInfo, index) {
+        if (couponInfo.coupon) {
+            var coupon = couponInfo.coupon;
+            var couponHtml = `
+                    <div id="coupon-${index}" class="card" style="max-width: 420px;margin-bottom: 10px;">
+                        <div class="card-header">${coupon.name}</div>
+                        <div class="card-body">
+                            <div class="card-text">jkModel發送了優惠卷，趕快來取得更優惠的購物價格</div>
+                            <span>優惠價格： ${coupon.discount} 元</span>，
+                            <span>剩餘票數： ${couponInfo.remainingQuantity}</span>
+                            <br>
+                            <button type="button" class="btn btn-success" onclick="getCoupon(${index})">取得優惠券</button>
+                           <button type="button" class="btn btn-danger" onclick="giveUpCoupon(${index})">放棄</button>
+                        </div>
+                    </div>
+            `;
+
+            $('#couponContainer').append(couponHtml);
+        }
+    });
+};
 
 
+// ================================== 設置與取得cookie(test) ==================================
+$(function () {
+    localStorage.setItem('userId','1001');
+});
 
+// ================================== 取得/放棄優惠卷 ==================================
+function getCoupon(index) {
+    var userId = localStorage.getItem("userId");
+    console.log('getCoupon方法中' + userId);
+    if( userId !== null ){
+        //發送ajax判斷資料庫是否有該優惠卷，如果有回傳你已經有此優惠卷，如果沒有則成功取得
+        console.log("開始執行會員取得優惠卷的方法");
+        var couponNo = couponInfoList[index].coupon.couponNo;
+        $.ajax({
+            url: `http://localhost:8080/coupon?userId=${userId}&couponNo=${couponNo}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                if (data == "success"){
+                    alert("成功取得該優惠卷");
+                } else {
+                    alert("你已經有這張優惠卷了,請查看會員中心的優惠卷管理");
+                }
+            }
+        });
+    } else {
+        confirm ("請先登入後才能取得優惠卷");
+        window.location.href="signIn.html";
+    }
+}
+
+function giveUpCoupon(index) {
+    var confirmResult = confirm("確定要放棄優惠卷吗？");
+    if (confirmResult) {
+        stompClient.send('/app/giveUpCoupon', {}, JSON.stringify({ index: index }));
+    }
+}
+
+// ================================== websocket 通道 ==================================
+// 使用 STOMP.js 連結 WebSocket
+var socket = new SockJS('http://localhost:8081/coupon-websocket'); // 使用 WebSocket 的端点路径
+var stompClient = Stomp.over(socket);
+
+// 連接 STOMP 服務
+stompClient.connect({}, function (frame) {
+    console.log('Connected: ' + frame);
+
+    // 訂閱消息
+    stompClient.subscribe('/topic/coupons', function (message) {
+        // 处理收到的消息
+        var couponInfoList = JSON.parse(message.body);
+        // console.log("Received coupons: ", couponInfoList);
+        addMessageToList(couponInfoList);
+    });
+});
+
+
+// 關閉連線(未完成)
+$('#closeWebsocketConnection').click(function () {
+    alert("成功關閉websocket連線");
+    stompClient.disconnect();
+});
