@@ -23,7 +23,7 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAdmin);
     }
 
-    @PutMapping("/admin/{adminId}")
+    @PutMapping("/update/{adminId}")
     public ResponseEntity<Admin> update(@PathVariable Integer adminId,
                                         @RequestBody Admin admin) {
         //先搜尋有無此筆資料

@@ -1,8 +1,10 @@
 package com.jkmodel.store.admin.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -28,7 +30,8 @@ public class Admin {
     @Column(name = "password")
     String password;
 
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_time", insertable = false, updatable = false)
     LocalDateTime createdTime;
 
