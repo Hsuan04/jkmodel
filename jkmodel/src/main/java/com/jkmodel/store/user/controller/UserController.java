@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+//@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 public class UserController {
 
@@ -27,17 +27,23 @@ public class UserController {
 
     }
 
-//    public ResponseEntity verify(@RequestBody String enteredCode){
-//
-//    }
-
     @PostMapping("/users/login")
-    public ResponseEntity<User> login(@RequestBody @Valid LoginRequest loginRequest){
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
 
-        User user = userService.login(loginRequest);
+//        String jwt = userService.loginAndGetJWT(loginRequest);
 
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+//        return ResponseEntity.status(HttpStatus.OK).body(jwt);
+
+        return ResponseEntity.status(HttpStatus.OK).body("123");
     }
+
+//    @PostMapping("/users/login")
+//    public ResponseEntity<User> login(@RequestBody @Valid LoginRequest loginRequest){
+//
+//        User user = userService.login(loginRequest);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(user);
+//    }
 
     @PostMapping("/users/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Integer userId,
@@ -54,8 +60,5 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updateUser);
     }
-
-
-
 
 }

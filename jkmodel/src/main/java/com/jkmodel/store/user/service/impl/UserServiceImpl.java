@@ -1,7 +1,7 @@
 package com.jkmodel.store.user.service.impl;
 
+
 import com.jkmodel.store.user.MailManager;
-import com.jkmodel.store.user.dao.UserDao;
 import com.jkmodel.store.user.dto.LoginRequest;
 import com.jkmodel.store.user.dto.UpdateUserRequest;
 import com.jkmodel.store.user.entity.User;
@@ -10,6 +10,12 @@ import com.jkmodel.store.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
@@ -28,35 +34,64 @@ public class UserServiceImpl implements UserService {
     private MailManager mailManager;
 
 
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Override
-    public User login(LoginRequest loginRequest) {
 
-        //在進行比對並找出帳號
-        User user = userRepository.findByEmail(loginRequest.getEmail());
+//    @Override
+//    public String loginAndGetJWT(LoginRequest loginRequest) {
+//
+//        System.out.println("我進到loginAndGetJwt");
+//
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+//
+//        System.out.println("回到userService");
+//
+//        System.out.println(userDetails);
+//
+//        // Spring Security 將在內部處理身份驗證
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, loginRequest.getPassword(), userDetails.getAuthorities());
+//
+//        System.out.println(authentication);
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//        // 生成並返回 JWT
+//        return jwtTokenProvider.generateToken(authentication);
+//    }
 
-        if (user == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
 
-        //將登入的密碼加密成MD5
-        String hashPassword = DigestUtils.md5DigestAsHex(loginRequest.getPassword().getBytes());
-
-        //比較密碼
-        if (user.getPassword().equals(hashPassword)){
-            return user;
-        }{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-
-    }
+    //    @Override
+//    public User login(LoginRequest loginRequest) {
+//
+//        //在進行比對並找出帳號
+//        User user = userRepository.findByEmail(loginRequest.getEmail());
+//
+//        if (user == null){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+//
+//        //將登入的密碼加密成MD5
+//        String hashPassword = DigestUtils.md5DigestAsHex(loginRequest.getPassword().getBytes());
+//
+//        //比較密碼
+//        if (user.getPassword().equals(hashPassword)){
+//            return user;
+//        }{
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
 
     @Override
     public User register(User user) {
         //檢查註冊的 email
-        User exist = userRepository.findByEmail(user.getEmail());
+        User exist = userRepository.findByEmail(user.getEmail()).orElse(null);
 
         if (exist != null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"duplicateEmail");

@@ -162,10 +162,10 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="account"
+                    id="email"
                     placeholder="請輸入帳號"
-                    aria-label="account"
-                    aria-describedby="account-addon"
+                    aria-label="email"
+                    aria-describedby="email-addon"
                   />
                 </div>
                 <label>密碼</label>
@@ -247,7 +247,7 @@
         // 停止點擊預設事件
         e.preventDefault();
 
-        if ($("#account").val().trim() == "") {
+        if ($("#email").val().trim() == "") {
           alert("請輸入帳號！");
           return;
         } else if ($("#password").val() == "") {
@@ -257,15 +257,16 @@
 
         /*  將 sign-in 資料用物件包裝  */
         let signIn_item = {
-          account: $("#account").val(),
+          email: $("#email").val(),
           password: $("#password").val(),
         };
         console.log(signIn_item);
 
         $.ajax({
-          url: "",
+          url: "http://localhost:8080/users/login",
           type: "POST",
-          data: signIn_item,
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(signIn_item),
           dataType: "json",
           beforeSend: function () {
             console.log("success前->beforeSend");
@@ -288,12 +289,12 @@
           switch (data.status) {
             case "accFailed":
               alert("帳號錯誤，請重新輸入帳號！");
-              $("#account").val("");
+              $("#email").val("");
               $("#password").val("");
               break;
             case "pswFailed":
               alert("密碼錯誤，請重新輸入密碼！");
-              $("#account").val("");
+              $("#email").val("");
               $("#password").val("");
               break;
             case "success":
