@@ -31,7 +31,7 @@ public class CouponWebSocketHandler extends TextWebSocketHandler {
             Integer quantity = entry.getValue();
             Coupon resultCoupon = couponService.findById(Integer.valueOf(couponNo)).orElse(null);
 
-            // 判斷是否過期
+            // 判斷是否在發送期限內，若有則送到前端
             if (resultCoupon != null && resultCoupon.getReleaseTime().isBefore(LocalDateTime.now())) {
                 CouponInfo couponInfo = new CouponInfo();
                 couponInfo.setCoupon(resultCoupon);
@@ -39,8 +39,9 @@ public class CouponWebSocketHandler extends TextWebSocketHandler {
 
                 couponInfoList.add(couponInfo);
             }
+
         }
-        // 發送coupon訊息到指定位置
+        // 發送coupon訊息到("/sendCoupon")
         messagingTemplate.convertAndSend("/topic/coupons", couponInfoList);
         System.out.println("發送couponInfoList:" + couponInfoList);
     }

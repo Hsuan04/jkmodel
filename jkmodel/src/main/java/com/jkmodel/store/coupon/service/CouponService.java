@@ -2,6 +2,7 @@ package com.jkmodel.store.coupon.service;
 
 import com.jkmodel.store.coupon.dto.Coupon;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CouponService {
@@ -9,5 +10,7 @@ public interface CouponService {
     Coupon save(Coupon coupon);
 
     Optional<Coupon> findById(Integer couponNo);
+
+    List<Coupon> findAll();
 
 }

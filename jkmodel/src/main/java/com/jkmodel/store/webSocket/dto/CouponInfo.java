@@ -5,6 +5,7 @@ import com.jkmodel.store.coupon.dto.Coupon;
 public class CouponInfo {
 
     Coupon coupon;
+
     Integer remainingQuantity;
 
     public Coupon getCoupon() {

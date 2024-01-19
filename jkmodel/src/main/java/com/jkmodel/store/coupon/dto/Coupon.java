@@ -18,7 +18,7 @@ public class Coupon {
     @Column(name = "couponNo")
     Integer couponNo;
 
-    @NotBlank(message = "商品名稱不能為空白")
+    @NotBlank(message = "優惠卷名稱不能為空白")
     @Column(name = "name")
     String name;
 

@@ -42,11 +42,11 @@
 <!-- =============== 管理者名稱開始 =============== -->
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="" alt="" style="width: 40px; height: 40px;">
+<!--                        <img class="rounded-circle" src="" alt="" style="width: 40px; height: 40px;">-->
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">管理者名稱</h6>
+                        <h6 class="mb-0">Lawrence</h6>
                         <span>管理者</span>
                     </div>
                 </div>
@@ -80,8 +80,8 @@
                     <div class="nav-item dropdown">
 <!-- =============== 上面列表管理者 =============== -->
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">管理者名稱</span>
+<!--                            <img class="rounded-circle me-lg-2" src="" alt="" style="width: 40px; height: 40px;">-->
+                            <span class="d-none d-lg-inline-flex">Lawrence</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="AdminLogin.html" class="dropdown-item">登出</a>
@@ -93,24 +93,31 @@
 <!-- =============== 內容開始 =============== -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
-                    <!--.-->
+                    <div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4" style="display: inline-block;">優惠卷管理列表</h6>
+                            <a href="addCoupon.html" class="btn btn-primary" style="display: inline-block; margin-left: 40px;">新增優惠卷</a>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">名稱</th>
+                                        <th scope="col">優惠金額</th>
+                                        <th scope="col">低消金額</th>
+                                        <th scope="col">發送數量</th>
+                                        <th scope="col">有效日期</th>
+                                        <th scope="col">失效日期</th>
+                                    </tr>
+                                    </thead>
+                                    <!-- 優惠卷陳列 -->
+                                    <tbody id="couponContainer">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 <!-- =============== 內容結束 =============== -->
@@ -156,7 +163,7 @@
     <!-- Template Javascript -->
     <script src="../../static/admin/js/main.js"></script>
 
-    <script src="../../static/admin/js/addproduct.js"></script>
+    <script src="../../static/admin/js/allcoupon.js"></script>
 </body>
 
 </html>

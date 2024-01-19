@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,11 @@ public class CouponServiceImpl implements CouponService{
     public Optional<Coupon> findById(Integer couponNo) {
         Optional<Coupon> coupon = couponRepository.findById(couponNo);
         return coupon;
+    }
+
+    @Override
+    public List<Coupon> findAll() {
+        List<Coupon> couponList = couponRepository.findAll();
+        return couponList;
     }
 }

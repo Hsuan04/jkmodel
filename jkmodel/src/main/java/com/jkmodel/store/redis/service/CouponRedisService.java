@@ -31,13 +31,17 @@ public class CouponRedisService {
         LocalDateTime releaseTime = savedCoupon.getReleaseTime();
         Integer validDays = savedCoupon.getValidDays();
 
-        // 將 couponNo,quantity 存進 Redis DB03
-        redisTemplateDB03.opsForValue().set(couponKey, quantity);
+        //判斷是否有發送天數
+        if (validDays == null){
+            redisTemplateDB03.opsForValue().set(couponKey, quantity);
+        } else {
+            redisTemplateDB03.opsForValue().set(couponKey, quantity);
 
-        // 設定存活時間 (測試使用2分鐘)
-        Duration timeToLive = Duration.between(LocalDateTime.now(), releaseTime.plusDays(validDays));
-        redisTemplateDB03.expire(couponKey, 6000000, TimeUnit.MILLISECONDS);
-//        redisTemplateDB03.expire(couponKey, timeToLive.toMillis(), TimeUnit.MILLISECONDS);
+            // 設定存活時間
+            Duration timeToLive = Duration.between(LocalDateTime.now(), releaseTime.plusDays(validDays));
+//          redisTemplateDB03.expire(couponKey, 6000000, TimeUnit.MILLISECONDS);
+            redisTemplateDB03.expire(couponKey, timeToLive.toMillis(), TimeUnit.MILLISECONDS);
+        }
     }
 
     // 每10分鐘觸發檢查優惠卷並調用 WebSocket

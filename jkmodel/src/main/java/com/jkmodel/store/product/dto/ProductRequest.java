@@ -17,11 +17,11 @@ public class ProductRequest {
     private String category;
 
     @NotNull(message = "商品價格不能為空白")
-    @DecimalMin(value = "0.00", message = "商品價格最低為0.00")
+    @DecimalMin(value = "0.00", message = "商品價格最低為0元")
     private Double price;
 
     @NotNull(message = "商品成本不能為空白")
-    @DecimalMin(value = "0.00", message = "商品成本最低為0.00")
+    @DecimalMin(value = "0.00", message = "商品成本最低為0元")
     private Double cost;
 
     @NotNull(message = "商品庫存不能為空白")
@@ -32,10 +32,8 @@ public class ProductRequest {
 
     private Integer views;
 
-    @NotNull(message = "上架時間不能為空白")
     private String onTime;
 
-    @NotNull(message = "下架時間不能為空白")
     private String offTime;
 
     @NotBlank(message = "商品描述不能為空白")

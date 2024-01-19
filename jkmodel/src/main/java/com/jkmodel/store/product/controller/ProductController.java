@@ -57,7 +57,7 @@ public class ProductController {
 
         // 設定定向到網頁網址
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("https://www.google.com"));
+        headers.setLocation(URI.create(""));
         return new ResponseEntity<>(succesMsg, headers, HttpStatus.FOUND);
     }
 
@@ -108,7 +108,7 @@ public class ProductController {
             @RequestParam(required = false) String category,            //商品分類
             @RequestParam(defaultValue = "onTime") String orderBy,      //排序根據
             @RequestParam(defaultValue = "desc") String sort,           //排序方式
-            @RequestParam(defaultValue = "100") Integer size,            //幾筆資料
+            @RequestParam(defaultValue = "100") Integer size,           //幾筆資料
             @RequestParam(defaultValue = "0") Integer page,             //頁數
             @RequestParam(required = false) Double minPrice,            //最低金額
             @RequestParam(required = false) Double maxPrice) {          //最低金額

@@ -381,22 +381,24 @@ function addMessageToList(couponInfoList) {
     $('#couponContainer').empty();
 
     // 判斷 List 增加關閉優惠卷消息的通道
-    // if (couponInfoList != null) {
-    //     var closeConnection = `<button type="button" class="btn btn-secondary btn-sm" id="closeWebsocketConnection">關閉優惠卷消息</button>`;
-    //     $('#couponContainer').append(closeConnection);
-    // }
+    if (couponInfoList != null) {
+        var closeConnection = `<button id="closeWebsocketConnection" type="button" class="btn btn-secondary btn-sm"
+        style="position: fixed; bottom: 20px; right: 20px; max-width: 420px; z-index: 1;">關閉優惠卷消息</button>`;
+        $('#couponContainer').append(closeConnection);
+    }
 
     // 遍歷 couponInfoList 並生成 HTML 元素
     couponInfoList.forEach(function(couponInfo, index) {
         if (couponInfo.coupon) {
             var coupon = couponInfo.coupon;
+            var remainingQuantityText = (couponInfo.remainingQuantity !== null) ? couponInfo.remainingQuantity : "無限";
             var couponHtml = `
                     <div id="coupon-${index}" class="card" style="max-width: 420px;margin-bottom: 10px;">
                         <div class="card-header">${coupon.name}</div>
                         <div class="card-body">
                             <div class="card-text">jkModel發送了優惠卷，趕快來取得更優惠的購物價格</div>
                             <span>優惠價格： ${coupon.discount} 元</span>，
-                            <span>剩餘票數： ${couponInfo.remainingQuantity}</span>
+                            <span>剩餘票數： ${remainingQuantityText}</span>
                             <br>
                             <button type="button" class="btn btn-success" onclick="getCoupon(${index})">取得優惠券</button>
                            <button type="button" class="btn btn-danger" onclick="giveUpCoupon(${index})">放棄</button>
@@ -406,6 +408,13 @@ function addMessageToList(couponInfoList) {
 
             $('#couponContainer').append(couponHtml);
         }
+    });
+
+    // 關閉連線
+    $('#closeWebsocketConnection').click(function () {
+        alert("成功關閉websocket連線");
+        $('#couponContainer').empty();
+        stompClient.disconnect();
     });
 };
 
@@ -449,6 +458,7 @@ function giveUpCoupon(index) {
 }
 
 // ================================== websocket 通道 ==================================
+
 // 使用 STOMP.js 連結 WebSocket
 var socket = new SockJS('http://localhost:8081/coupon-websocket'); // 使用 WebSocket 的端点路径
 var stompClient = Stomp.over(socket);
@@ -459,7 +469,6 @@ stompClient.connect({}, function (frame) {
 
     // 訂閱消息
     stompClient.subscribe('/topic/coupons', function (message) {
-        // 处理收到的消息
         var couponInfoList = JSON.parse(message.body);
         // console.log("Received coupons: ", couponInfoList);
         addMessageToList(couponInfoList);
@@ -467,8 +476,3 @@ stompClient.connect({}, function (frame) {
 });
 
 
-// 關閉連線(未完成)
-$('#closeWebsocketConnection').click(function () {
-    alert("成功關閉websocket連線");
-    stompClient.disconnect();
-});
