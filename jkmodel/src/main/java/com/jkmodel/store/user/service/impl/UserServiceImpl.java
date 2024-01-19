@@ -1,15 +1,21 @@
 package com.jkmodel.store.user.service.impl;
 
+
 import com.jkmodel.store.user.MailManager;
-import com.jkmodel.store.user.dao.UserDao;
 import com.jkmodel.store.user.dto.LoginRequest;
 import com.jkmodel.store.user.dto.UpdateUserRequest;
 import com.jkmodel.store.user.entity.User;
 import com.jkmodel.store.user.repository.UserRepository;
 import com.jkmodel.store.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
@@ -28,38 +34,67 @@ public class UserServiceImpl implements UserService {
     private MailManager mailManager;
 
 
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    private UserDetailsServiceImpl userDetailsService;
 
-    @Override
-    public User login(LoginRequest loginRequest) {
 
-        //在進行比對並找出帳號
-        User user = userRepository.findByEmail(loginRequest.getEmail());
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-        if (user == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
 
-        //將登入的密碼加密成MD5
-        String hashPassword = DigestUtils.md5DigestAsHex(loginRequest.getPassword().getBytes());
+//    @Override
+//    public String loginAndGetJWT(LoginRequest loginRequest) {
+//
+//        System.out.println("我進到loginAndGetJwt");
+//
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+//
+//        System.out.println("回到userService");
+//
+//        System.out.println(userDetails);
+//
+//        // Spring Security 將在內部處理身份驗證
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, loginRequest.getPassword(), userDetails.getAuthorities());
+//
+//        System.out.println(authentication);
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//        // 生成並返回 JWT
+//        return jwtTokenProvider.generateToken(authentication);
+//    }
 
-        //比較密碼
-        if (user.getPassword().equals(hashPassword)){
-            return user;
-        }{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
 
-    }
+    //    @Override
+//    public User login(LoginRequest loginRequest) {
+//
+//        //在進行比對並找出帳號
+//        User user = userRepository.findByEmail(loginRequest.getEmail());
+//
+//        if (user == null){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+//
+//        //將登入的密碼加密成MD5
+//        String hashPassword = DigestUtils.md5DigestAsHex(loginRequest.getPassword().getBytes());
+//
+//        //比較密碼
+//        if (user.getPassword().equals(hashPassword)){
+//            return user;
+//        }{
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
 
     @Override
     public User register(User user) {
         //檢查註冊的 email
-        User exist = userRepository.findByEmail(user.getEmail());
+        User exist = userRepository.findByEmail(user.getEmail()).orElse(null);
 
         if (exist != null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"duplicateEmail");
         }
         //使用MD5 生成密碼的雜湊值
         String hashPassword = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
@@ -72,6 +107,14 @@ public class UserServiceImpl implements UserService {
         sendRegistrationConfirmationEmail(savedUser.getEmail());
 
         return savedUser;
+    }
+
+    @Override
+    public boolean verifyVerificationCode(String userEmail, String enteredCode) {
+        String storedCode = stringRedisTemplate.opsForValue().get("verificationCode:" + userEmail);
+
+        // 比對使用者輸入的驗證碼和 Redis 中儲存的驗證碼是否相符
+        return storedCode != null && storedCode.equals(enteredCode);
     }
 
     @Override
@@ -126,8 +169,10 @@ public class UserServiceImpl implements UserService {
         // 調用注入的 MailManager 的 sentMail 方法
         mailManager.sentMail(from, sendTo, cc, bcc, personal, subject, context);
 
+        System.out.println(userEmail);
+
         // 將驗證碼儲存在 Redis 中，有效期為一定時間（例如 10 分鐘）
-        redisTemplate.opsForValue().set("verificationCode:" + userEmail, verificationCode, 10, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(userEmail, verificationCode, 10, TimeUnit.MINUTES);
 
 
     }

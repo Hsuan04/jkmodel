@@ -65,7 +65,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-3">
             <a
-              href="../templetes/index.html"
+              href="/index.html"
               class="header__logo"
               style="
                 text-decoration: none;
@@ -84,9 +84,9 @@
           <div class="col-lg-6 col-md-6">
             <nav class="header__menu mobile-menu">
               <ul>
-                <li><a href="../templetes/index.html">首頁</a></li>
+                <li><a href="/index.html">首頁</a></li>
                 <li class="active">
-                  <a href="../templetes/shop.html">商城</a>
+                  <a href="/shop.html">商城</a>
                 </li>
                 <li class="shop__sidebar__search">
                   <form action="#">
@@ -101,15 +101,15 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-              <a href="../templetes/collection.html"
+              <a href="/collection.html"
                 ><img src="../static/images/icon/heart.png" alt=""
               /></a>
-              <a href="../templetes/shopping-cart.html"
+              <a href="/shopping-cart.html"
                 ><img src="../static/images/icon/cart.png" alt="" />
                 <span id="shoppingCartCount"></span
               ></a>
               <span id="shoppingCartPrice">元</span>
-              <a href="../templetes/signIn.html"
+              <a href="/signIn.html"
                 ><i
                   class="fa-regular fa-user"
                   style="color: #000000; margin-left: 10px"
@@ -257,9 +257,7 @@
                   />
                   <p class="text-sm mt-3 mb-0">
                     已經有帳號了?
-                    <a
-                      href="./sign-in.html"
-                      class="text-dark font-weight-bolder"
+                    <a href="signIn.html" class="text-dark font-weight-bolder"
                       >點我登入</a
                     >
                   </p>
@@ -314,27 +312,20 @@
           },
           success: function (data) {
             console.log(data);
-            // redirect(data);
+            location.href = "registration-verification.html";
           },
-          complete: function (xhr) {},
+          error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status === 400) {
+              // HTTP 400 Bad Request，表示註冊失敗
+              alert("註冊失敗，帳號已重複，請修正後再提交申請！");
+              $("#account").val("");
+            } else {
+              // 其他錯誤情況，您可以進一步處理
+              console.error("Unexpected error:", errorThrown);
+              alert("未知的錯誤，請稍後再試。");
+            }
+          },
         });
-        // function redirect(data) {
-        //   console.log(data);
-        //   switch (data.status) {
-        //     case "duplicateEmail":
-        //       alert("信箱已重複，請輸入其他信箱！");
-        //       $("#email").val("");
-        //       break;
-        //     case "success":
-        //       alert("驗證碼已寄到您的信箱，請前往收信並驗證。");
-        //       location.href = "registration-verification.html";
-        //       break;
-        //     case "failed":
-        //       alert("註冊失敗，帳號已重複，請修正後再提交申請！");
-        //       $("#account").val("");
-        //       break;
-        //   }
-        // }
       });
     </script>
   </body>
